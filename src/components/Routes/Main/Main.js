@@ -1,9 +1,14 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import CustomFooter from '../../Shared/Footer/CustomFooter';
+import CustomNavbar from '../../Shared/Navbar/CustomNavbar';
 
 const Main = () => {
     return (
 			<div>
-				<h1>Main page</h1>
+			<CustomNavbar></CustomNavbar>
+			<Outlet></Outlet>
+			<CustomFooter></CustomFooter>
 			</div>
 		);
 };

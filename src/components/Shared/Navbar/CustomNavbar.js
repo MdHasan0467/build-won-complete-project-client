@@ -1,18 +1,18 @@
-import { Avatar, Dropdown } from 'flowbite-react';
+import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import React from 'react';
 
-const Navbar = () => {
+const CustomNavbar = () => {
     return (
 			<div>
-				<Navbar fluid={true} rounded={true}>
+				<Navbar className='' fluid={true} rounded={true}>
 					<Navbar.Brand href='https://flowbite.com/'>
 						<img
-							src='https://flowbite.com/docs/images/logo.svg'
-							className='mr-3 h-6 sm:h-9'
-							alt='Flowbite Logo'
+							src='PremiCar.png'
+							className='mr-3 h-6 sm:h-9 rounded-lg'
+							alt='PremiCar Logo'
 						/>
 						<span className='self-center whitespace-nowrap text-xl font-semibold dark:text-white'>
-							Flowbite
+							PremiCar
 						</span>
 					</Navbar.Brand>
 					<div className='flex md:order-2'>
@@ -55,4 +55,4 @@ const Navbar = () => {
 		);
 };
 
-export default Navbar;
+export default CustomNavbar;
