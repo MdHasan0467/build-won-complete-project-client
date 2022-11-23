@@ -11,6 +11,7 @@
 3. npm i daisyui
 4. npm install react-icons --save
 5. npm install firebase
+6. npm install react-hook-form
 
 
 
