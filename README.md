@@ -1,3 +1,24 @@
+### Project Name: `PremiCar`
+
+### Live Link :
+### Client github :
+### Server github :
+
+
+### `Installations :`
+1. npm i react-router-dom
+2. npm i flowbite flowbite-react
+3. npm i daisyui
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
