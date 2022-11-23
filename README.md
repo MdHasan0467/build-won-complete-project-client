@@ -9,7 +9,8 @@
 1. npm i react-router-dom
 2. npm i flowbite flowbite-react
 3. npm i daisyui
-
+4. npm install react-icons --save
+5. npm install firebase
 
 
 
