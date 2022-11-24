@@ -18,7 +18,7 @@ const Advertisement = () => {
     // console.log(category);
 	return (
 		<div>
-			<h1>Advertisement Section</h1>
+			<h1 className='my-5'>Advertisement Section</h1>
 		</div>
 	);
 };
