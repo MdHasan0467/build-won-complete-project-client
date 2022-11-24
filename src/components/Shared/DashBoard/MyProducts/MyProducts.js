@@ -104,6 +104,14 @@ const MyProducts = () => {
 									</span>
 									{product.description}
 								</p>
+								{product.author && (
+									<p>
+										<span className='text-bold text-gray-800 text-xl'>
+											Author Name :
+										</span>
+										{product.author}
+									</p>
+								)}
 								<div className='flex'>
 									<button
 										onClick={() => handleAdvertise(product?._id)}

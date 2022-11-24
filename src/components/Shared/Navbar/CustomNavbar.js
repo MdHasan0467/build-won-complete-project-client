@@ -1,8 +1,21 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
+import toast from 'react-hot-toast';
 
 const CustomNavbar = () => {
+	const { user, logOut } = useContext(AuthContext);
+		const navigate = useNavigate();
+
+		const handleLogOut = () => {
+			navigate('/login');
+			logOut()
+				.then(() => {
+					toast.error('Log Out!');
+				})
+				.catch((error) => console.error(error));
+		};
     return (
 			<div>
 				<Navbar className='' fluid={true} rounded={true}>
@@ -18,38 +31,43 @@ const CustomNavbar = () => {
 							</span>
 						</Link>
 					</Navbar.Brand>
-					<div className='flex md:order-2'>
-						<Dropdown
-							arrowIcon={false}
-							inline={true}
-							label={
-								<Avatar
-									alt='User settings'
-									img='https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-									rounded={true}
-								/>
-							}
-						>
-							<Dropdown.Header>
-								<span className='block text-sm'>Bonnie Green</span>
-								<span className='block truncate text-sm font-medium'>
-									name@flowbite.com
-								</span>
-							</Dropdown.Header>
-							<Dropdown.Item>
-								<Link to='/dashboard'>Dashboard</Link>
-							</Dropdown.Item>
-							<Dropdown.Divider />
-							<Dropdown.Item>Sign out</Dropdown.Item>
-						</Dropdown>
-						<Navbar.Toggle />
-					</div>
+					{user && (
+						<div className='flex md:order-2'>
+							<Dropdown
+								arrowIcon={false}
+								inline={true}
+								label={
+									<Avatar
+										alt='User settings'
+										img={user?.photoURL}
+										rounded={true}
+									/>
+								}
+							>
+								<Dropdown.Header>
+									<span className='block text-sm'>{user?.displayName}</span>
+									<span className='block truncate text-sm font-medium'>
+										{user?.email}
+									</span>
+								</Dropdown.Header>
+								<Dropdown.Item>
+									<Link to='/dashboard'>Dashboard</Link>
+								</Dropdown.Item>
+								<Dropdown.Divider />
+								<Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
+							</Dropdown>
+							<Navbar.Toggle />
+						</div>
+					)}
 					<Navbar.Collapse>
-						<Link to='/home'>Home</Link>
-						<Link to='/'>FAQ</Link>
+						{user && (
+							<>
+								<Link to='/home'>Home</Link>
+								<Link to='/'>FAQ</Link>
+							</>
+						)}
 						<Link to='/'>About</Link>
-						<Link to='/'>Contact</Link>
-						<Link to='/login'>Login</Link>
+						{!user && <Link to='/login'>Login</Link>}
 					</Navbar.Collapse>
 				</Navbar>
 			</div>

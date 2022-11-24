@@ -2,12 +2,12 @@
 import React from 'react';
 
 const Advertisement = () => {
-	// //! fetch for getting products data from mongodb.....
+	// // //! fetch for getting products data from mongodb.....
 	// const { data: category } = useQuery({
 	// 	queryKey: ['category'],
 	// 	queryFn: async () => {
 	// 		try {
-	// 			const res = await fetch(`http://localhost:5000/advertisement/${category}`);
+	// 			const res = await fetch('http://localhost:5000//advertisement/category');
 	// 			const data = await res.json();
 	// 			return data;
 	// 		} catch (err) {

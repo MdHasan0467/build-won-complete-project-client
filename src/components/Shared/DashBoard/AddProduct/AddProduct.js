@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
+	const {user, loader} = useContext(AuthContext)
 	const {
 		register,
 		handleSubmit,
@@ -33,6 +35,7 @@ const AddProduct = () => {
 					// console.log(imgData.data.url)
 
 					const addedProduct = {
+						author:user.displayName,
 						title: data.title,
 						location: data.location,
 						category: data.category,
@@ -92,7 +95,7 @@ const AddProduct = () => {
 										<p className='text-red-500'>{errors.title.message}</p>
 									)}
 								</div>
-								<div className='form-control  w-full max-w-xs'></div>
+								<div className='form-control  w-full max-w-xs'>{user.displayName}</div>
 							</div>
 							<div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
 								<div className='form-control w-full max-w-xs'>
