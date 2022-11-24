@@ -13,6 +13,8 @@ const AddProduct = () => {
 		formState: { errors },
 	} = useForm();
 
+	const time = String(new Date());
+
 	const navigate = useNavigate();
 	//! from .env.local file====>
 	const imgHostKey = process.env.REACT_APP_Imgbb_key;
@@ -35,7 +37,7 @@ const AddProduct = () => {
 					// console.log(imgData.data.url)
 
 					const addedProduct = {
-						author:user.displayName,
+						author: user.displayName,
 						title: data.title,
 						location: data.location,
 						category: data.category,
@@ -45,7 +47,8 @@ const AddProduct = () => {
 						yearOfPurchase: data.yearOfPurchase,
 						description: data.description,
 						image: imgData.data.url,
-					}
+						time,
+					};
 					// console.log(addedProduct);
 
 

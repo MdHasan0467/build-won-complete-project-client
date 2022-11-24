@@ -104,6 +104,12 @@ const MyProducts = () => {
 									</span>
 									{product.description}
 								</p>
+								<p>
+									<span className='text-bold text-gray-800 text-xl'>
+										Time :
+									</span>
+									{product.time}
+								</p>
 								{product.author && (
 									<p>
 										<span className='text-bold text-gray-800 text-xl'>
