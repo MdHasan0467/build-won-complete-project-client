@@ -39,8 +39,6 @@ const CustomNavbar = () => {
 							<Dropdown.Item>
 								<Link to='/dashboard'>Dashboard</Link>
 							</Dropdown.Item>
-							<Dropdown.Item>Settings</Dropdown.Item>
-							<Dropdown.Item>Earnings</Dropdown.Item>
 							<Dropdown.Divider />
 							<Dropdown.Item>Sign out</Dropdown.Item>
 						</Dropdown>

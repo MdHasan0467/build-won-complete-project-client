@@ -1,9 +1,70 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 const AddProduct = () => {
-    	const { register, handleSubmit, formState: { errors }, } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+
+	const navigate = useNavigate();
+	//! from .env.local file====>
+	const imgHostKey = process.env.REACT_APP_Imgbb_key;
+	// console.log(imgHostKey);
+
+	const handleAddedProduct = (data) => {
+		const image = data?.img[0];
+		// console.log(image);
+		const formData = new FormData();
+		formData.append('image', image);
+		const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
+		fetch(url, {
+			method: 'POST',
+			body: formData,
+		})
+			.then((res) => res.json())
+			.then((imgData) => {
+				// console.log(imgData);
+				if (imgData.success) {
+					// console.log(imgData.data.url)
+
+					const addedProduct = {
+						title: data.title,
+						location: data.location,
+						category: data.category,
+						resalePrice: data.resalePrice,
+						originalPrice: data.originalPrice,
+						yearsOfUse: data.yearsOfUse,
+						yearOfPurchase: data.yearOfPurchase,
+						description: data.description,
+						image: imgData.data.url,
+					}
+					// console.log(addedProduct);
+
+
+					//! Save addedProducts info to the database....
+					fetch('http://localhost:5000/products', {
+						method: 'POST',
+						headers: {
+							'content-type': 'application/json',
+						},
+						body: JSON.stringify(addedProduct),
+					})
+						.then((res) => res.json())
+						.then((result) => {
+							console.log(result);
+							toast.success('Successfully created a new Product!!');
+							navigate('/dashboard/myProduct');
+						});					
+				}
+			});
+	};
+
+
 	return (
 		<div className='bg-base-200'>
 			<br />
@@ -11,7 +72,10 @@ const AddProduct = () => {
 			<div className='hero min-h-screen bg-base-200'>
 				<div className='hero-content grid grid-cols-1 lg:grid-cols-2-col'>
 					<div className='card grid grid-cols-1 lg:grid-cols-2-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-						<form className='card-body'>
+						<form
+							onSubmit={handleSubmit(handleAddedProduct)}
+							className='card-body'
+						>
 							<div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
 								<div className='form-control w-full max-w-xs'>
 									<label className='label'>
@@ -24,8 +88,8 @@ const AddProduct = () => {
 										})}
 										className='input input-bordered w-full max-w-xs'
 									/>
-									{errors.name && (
-										<p className='text-red-500'>{errors.name.message}</p>
+									{errors.title && (
+										<p className='text-red-500'>{errors.title.message}</p>
 									)}
 								</div>
 								<div className='form-control  w-full max-w-xs'></div>
@@ -42,8 +106,8 @@ const AddProduct = () => {
 										})}
 										className='input input-bordered w-full max-w-xs'
 									/>
-									{errors.email && (
-										<p className='text-red-500'>{errors.email.message}</p>
+									{errors.location && (
+										<p className='text-red-500'>{errors.location.message}</p>
 									)}
 								</div>
 								<div className='form-control w-full max-w-xs'>
@@ -56,10 +120,13 @@ const AddProduct = () => {
 										})}
 										className='select input-bordered w-full max-w-xs'
 									>
-										<option selected>Electric car</option>
-										<option>Auto Driving Car</option>
-										<option>Sports Car</option>
+										<option>Tesla</option>
+										<option>Mercedes_Benz</option>
+										<option>Rolls_Royce</option>
 									</select>
+									{errors.category && (
+										<p className='text-red-500'>{errors.category.message}</p>
+									)}
 								</div>
 							</div>
 							<div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
@@ -68,14 +135,14 @@ const AddProduct = () => {
 										<span className='label-text'>Resale Price</span>
 									</label>
 									<input
-										type='text'
+										type='number'
 										{...register('resalePrice', {
 											required: true,
 										})}
 										className='input input-bordered w-full max-w-xs'
 									/>
-									{errors.email && (
-										<p className='text-red-500'>{errors.email.message}</p>
+									{errors.resalePrice && (
+										<p className='text-red-500'>{errors.resalePrice.message}</p>
 									)}
 								</div>
 								<div className='form-control w-full max-w-xs'>
@@ -83,14 +150,16 @@ const AddProduct = () => {
 										<span className='label-text'>Original Price</span>
 									</label>
 									<input
-										type='text'
+										type='number'
 										{...register('originalPrice', {
 											required: true,
 										})}
 										className='input input-bordered w-full max-w-xs'
 									/>
-									{errors.email && (
-										<p className='text-red-500'>{errors.email.message}</p>
+									{errors.originalPrice && (
+										<p className='text-red-500'>
+											{errors.originalPrice.message}
+										</p>
 									)}
 								</div>
 							</div>
@@ -100,14 +169,14 @@ const AddProduct = () => {
 										<span className='label-text'>Years of use</span>
 									</label>
 									<input
-										type='text'
+										type='number'
 										{...register('yearsOfUse', {
 											required: true,
 										})}
 										className='input input-bordered w-full max-w-xs'
 									/>
-									{errors.email && (
-										<p className='text-red-500'>{errors.email.message}</p>
+									{errors.yearsOfUse && (
+										<p className='text-red-500'>{errors.yearsOfUse.message}</p>
 									)}
 								</div>
 								<div className='form-control w-full max-w-xs'>
@@ -115,14 +184,16 @@ const AddProduct = () => {
 										<span className='label-text'>Year of purchase</span>
 									</label>
 									<input
-										type='text'
+										type='number'
 										{...register('yearOfPurchase', {
 											required: true,
 										})}
 										className='input input-bordered w-full max-w-xs'
 									/>
-									{errors.email && (
-										<p className='text-red-500'>{errors.email.message}</p>
+									{errors.yearOfPurchase && (
+										<p className='text-red-500'>
+											{errors.yearOfPurchase.message}
+										</p>
 									)}
 								</div>
 							</div>
@@ -137,8 +208,8 @@ const AddProduct = () => {
 									})}
 									className='input input-bordered w-full max-w-xs'
 								/>
-								{errors.email && (
-									<p className='text-red-500'>{errors.email.message}</p>
+								{errors.description && (
+									<p className='text-red-500'>{errors.description.message}</p>
 								)}
 							</div>
 							<div className='form-control w-full max-w-xs'>
