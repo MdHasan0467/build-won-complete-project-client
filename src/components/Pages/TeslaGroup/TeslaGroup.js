@@ -24,8 +24,13 @@ const TeslaGroup = () => {
 			}
 	return (
 		<div>
-			<h1 className='my-3'>Total Car : {teslaDatas?.length}</h1>
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+			<img
+				src='TESLA-BANNER.png'
+				alt='tesla banner'
+				className='w-[500px] hidden my-3 ml-[30%] lg:block h-[170px]'
+			/>
+
+			<div className='grid grid-cols-1 my-5 md:grid-cols-2 lg:grid-cols-3 gap-4'>
 				{teslaDatas?.map((teslaData) => (
 					<div className='card w-96 bg-base-100 shadow-xl'>
 						<figure>
@@ -41,9 +46,59 @@ const TeslaGroup = () => {
 								<div className='badge badge-secondary text-white'>NEW</div>
 							</h2>
 							<p className='text-start'>Exposure time : {teslaData?.time}</p>
+							
 							<p className='text-start'>
-								Resale Price : ${teslaData?.resalePrice}
+								<span className='text-bold text-gray-800 text-xl'>
+									Category :
+								</span>
+								{teslaData.category}
 							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Location :
+								</span>
+								{teslaData.location}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Original Price :
+								</span>
+								{teslaData.originalPrice}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Resale Price :
+								</span>
+								{teslaData.resalePrice}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Years of use :
+								</span>
+								{teslaData.yearsOfUse}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Year of Purchase :
+								</span>
+								{teslaData.yearOfPurchase}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Description :
+								</span>
+								{teslaData.description}
+							</p>
+							
+							{teslaData.author && (
+								<p className='text-start'>
+									<span className='text-bold text-gray-800 text-xl'>
+										Author Name :
+									</span>
+									{teslaData.author}
+								</p>
+							)}
+
 							<div className='card-actions justify-end'>
 								<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
 									Book Now

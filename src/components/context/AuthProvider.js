@@ -8,9 +8,6 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
-	
-	// const tenantId = '';
-	// auth.tenantId = tenantId;
 
 	const googleProvider = new GoogleAuthProvider();
 	//!<===================================>
@@ -28,10 +25,12 @@ const AuthProvider = ({ children }) => {
 		return updateProfile(auth.currentUser, {
 			displayName: name,
 			photoURL: photoURL,
+			
 		});
 	};
 	//!......................................
 
+	// onAuthStateChanged method onekta server er moto kaj kore,.,,,, user change hocce kina seita kheyal rakhe & sei onujaee output dekhay
 	useEffect(() => {
 		const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
 			console.log('user inside auth state change', currentUser);
@@ -73,9 +72,9 @@ const AuthProvider = ({ children }) => {
 		googleSignUp,
 		logOut,
 	};
-    return (
-			<AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-		);
+	return (
+		<AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+	);
 };
 
 export default AuthProvider;

@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import CustomNavbar from '../Navbar/CustomNavbar';
+import { AuthContext } from '../../Context/AuthProvider';
+import Loader from '../../Loader/Loader';
+import { useQuery } from '@tanstack/react-query';
 
 const DashBoard = () => {
+		const { loading, user } = useContext(AuthContext);
+		//! fetch for getting users data from mongodb.....
+		const { data: users } = useQuery({
+			queryKey: ['users'],
+			queryFn: async () => {
+				try {
+					const res = await fetch('http://localhost:5000/users');
+					const data = await res.json();
+					return data;
+				} catch (err) {
+					console.error(err);
+				}
+			},
+		});
+		if (loading) {
+		return <Loader></Loader>;
+	}
     return (
 			<div>
 				<CustomNavbar></CustomNavbar>

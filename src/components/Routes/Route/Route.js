@@ -1,12 +1,14 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import DeshboardDesign from '../../DeshboardDesign/DeshboardDesign';
+import FAQ from '../../Pages/FAQ/FAQ';
 import Home from '../../Pages/Home/Home';
 import Login from '../../Pages/Login/Login';
 import MercedesGroup from '../../Pages/MercedesGroup/MercedesGroup';
 import RollsGroup from '../../Pages/RollsGroup/RollsGroup';
 import Signup from '../../Pages/Signup/Signup';
 import TeslaGroup from '../../Pages/TeslaGroup/TeslaGroup';
+import PrivateRoute from '../../PrivateRoute/PrivateRoute';
 import AddProduct from '../../Shared/DashBoard/AddProduct/AddProduct';
 import AllBuyers from '../../Shared/DashBoard/AllBuyers/AllBuyers';
 import AllSeller from '../../Shared/DashBoard/AllSeller/AllSeller';
@@ -42,6 +44,10 @@ const Route = () => {
 						element: <MercedesGroup></MercedesGroup>,
 					},
 					{
+						path: '/faq',
+						element: <FAQ></FAQ>,
+					},
+					{
 						path: '/login',
 						element: <Login></Login>,
 					},
@@ -53,7 +59,7 @@ const Route = () => {
 			},
 			{
 				path: '/dashboard',
-				element: <DashBoard></DashBoard>,
+				element:<PrivateRoute> <DashBoard></DashBoard></PrivateRoute>,
 				children: [
 					{
 						path: '/dashboard/addProduct',

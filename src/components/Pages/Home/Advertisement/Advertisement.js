@@ -19,7 +19,7 @@ const Advertisement = () => {
 	});
     console.log(categories);
 	return (
-		<div>
+		<div className='mt-10'>
 			{categories?.length > 0 && (
 				<>
 					<h1 className='flex justify-start text-2xl text-gray-900 font-bold font-serif my-2 ml-5 underline'>

@@ -24,8 +24,13 @@ const MercedesGroup = () => {
 			}
 	return (
 		<div>
-			<h1 className='my-3'>Total Car : {mercedesDatas?.length}</h1>
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+			<img
+				src='mercedes.banner.jpg'
+				alt='tesla banner'
+				className='w-[500px] hidden my-3 ml-[30%] lg:block h-[200px]'
+			/>
+
+			<div className='grid grid-cols-1 my-5 md:grid-cols-2 lg:grid-cols-3 gap-4'>
 				{mercedesDatas?.map((mercedesData) => (
 					<div className='card w-96 bg-base-100 shadow-xl'>
 						<figure>
@@ -41,9 +46,58 @@ const MercedesGroup = () => {
 								<div className='badge badge-secondary text-white'>NEW</div>
 							</h2>
 							<p className='text-start'>Exposure time : {mercedesData?.time}</p>
+							
 							<p className='text-start'>
-								Resale Price : ${mercedesData?.resalePrice}
+								<span className='text-bold text-gray-800 text-xl'>
+									Category :
+								</span>
+								{mercedesData.category}
 							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Location :
+								</span>
+								{mercedesData.location}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Original Price :
+								</span>
+								{mercedesData.originalPrice}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Resale Price :
+								</span>
+								{mercedesData.resalePrice}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Years of use :
+								</span>
+								{mercedesData.yearsOfUse}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Year of Purchase :
+								</span>
+								{mercedesData.yearOfPurchase}
+							</p>
+							<p className='text-start'>
+								<span className='text-bold text-gray-800 text-xl'>
+									Description :
+								</span>
+								{mercedesData.description}
+							</p>
+							
+							{mercedesData.author && (
+								<p className='text-start'>
+									<span className='text-bold text-gray-800 text-xl'>
+										Author Name :
+									</span>
+									{mercedesData.author}
+								</p>
+							)}
 							<div className='card-actions justify-end'>
 								<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
 									Book Now

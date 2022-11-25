@@ -63,56 +63,56 @@ const MyProducts = () => {
 							</figure>
 							<div className='card-body'>
 								<h2 className='card-title'>{product.title}</h2>
-								<p>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Category :
 									</span>
 									{product.category}
 								</p>
-								<p>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Location :
 									</span>
 									{product.location}
 								</p>
-								<p>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Original Price :
 									</span>
 									{product.originalPrice}
 								</p>
-								<p>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Resale Price :
 									</span>
 									{product.resalePrice}
 								</p>
-								<p>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Years of use :
 									</span>
 									{product.yearsOfUse}
 								</p>
-								<p>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Year of Purchase :
 									</span>
 									{product.yearOfPurchase}
 								</p>
-								<p>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Description :
 									</span>
 									{product.description}
 								</p>
-								<p className='flex'>
+								<p className='text-start'>
 									<span className='text-bold text-gray-800 text-2xl text-green-600'>
 										<BsStopwatch></BsStopwatch>
 									</span>
 									{product.time}
 								</p>
 								{product.author && (
-									<p>
+									<p className='text-start'>
 										<span className='text-bold text-gray-800 text-xl'>
 											Author Name :
 										</span>

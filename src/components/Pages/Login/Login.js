@@ -1,130 +1,127 @@
 import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import toast, { Toaster } from 'react-hot-toast';
+import { json, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
-import toast from 'react-hot-toast';
-import Loader from '../../Loader/Loader';
+// import useToken from '../../../hook/useToken';
 
 const Login = () => {
-	const { user,loading, logIn, googleSignUp } = useContext(AuthContext);
-	const [success, setSuccess] = useState(false);
-	const [passwordError, setPasswordError] = useState('');
-
-
-	
-
-	const navigate = useNavigate();
+	const {register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm();
+	const { logIn, loading } = useContext(AuthContext);
+	const [loginError, setLoginError] = useState('');
 	const location = useLocation();
+	const navigate = useNavigate();
+	const [loginUserEmail, setLoginUserEmail] = useState('');
+	// const [token] = useToken(loginUserEmail);
+
 	const from = location.state?.from?.pathname || '/';
-	//!......................................
-	//!......................................
+	const toaster = location.state?.toast || false;
 
-	//! Google Log In....
-	const googleSignIn = () => {
-		googleSignUp()
+
+
+
+	if (toaster) {
+		toast.error(`Ohh, sorry!
+		You are not an admin!`);
+	}
+
+	// if (token) {
+	// 	navigate(from, { replace: true });
+	// }
+
+	const handleLogin = (data) => {
+		console.log(data);
+		setLoginError('');
+
+		//! login By User Email
+		logIn(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
+
+				fetch('http://localhost:5000/users')
+					.then(usersData => {
+					console.log(usersData)
+				}).catch(err => console.log(err))
+
 				navigate(from, { replace: true });
-				toast.success('Successfully Login!');
-			})
-			.catch((error) => console.error(error));
-	};
-	//!......................................
-
-	//! Form Log In...
-	const submitBtn = (e) => {
-		e.preventDefault();
-
-		setSuccess(false);
-		setPasswordError('');
-
-		const form = e.target;
-		const email = form.email.value;
-		const password = form.password.value;
-		console.log(email, password);
-
-		logIn(email, password)
-			.then((result) => {
-				const user = result.user;
-				console.log(user);
-				setSuccess(true);
-				form.reset();
-				// navigate(from, { replace: true });
-
-				const currentUser = {
-					email: user.email,
-				};
-				console.log(currentUser);
-				// //! request on the server to get a JWT token...
-				fetch('http://localhost:5000/jwt', {
-					method: 'POST',
-					headers: {
-						'content-type': 'application/json',
-					},
-					body: JSON.stringify(currentUser),
-				})
-					.then((res) => res.json())
-					.then((data) => {
-						console.log(data);
-						//! Set the JWT token on local storage...
-						localStorage.setItem('Login-token', data.token);
-						navigate(from, { replace: true });
-					});
+				toast.success('Successfully Login.');
+				setLoginUserEmail(data.email);
 			})
 			.catch((error) => {
-				console.error(error);
-				setPasswordError(error.message);
+				console.log(error.message);
+				toast.error('Sorry! Try again with valid user');
 			});
 	};
-		if (loading) {
-			return <Loader></Loader>;
-		}
 	return (
-		<div>
-			<div className='hero min-h-screen bg-base-200'>
-				<div className='hero-content flex-col'>
-					<div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-						<form onSubmit={submitBtn} className='card-body'>
-							<div className='form-control'>
-								<label className='label'>
-									<span className='label-text'>Email</span>
-								</label>
-								<input
-									type='email'
-									name= 'email'
-									placeholder='email'
-									className='input input-bordered'
-								/>
-							</div>
-							<div className='form-control'>
-								<label className='label'>
-									<span className='label-text'>Password</span>
-								</label>
-								<input
-									type='password'
-									name='password'
-									placeholder='Password'
-									className='input input-bordered'
-								/>
-								<label className='label'>
-									<p className='text-gray-600 mt-5'>
-										No account yet?
-										<span className='text-black font-semibold'> or </span>
-										<button className='py-1 px-2 hover:text-blue-500 rounded-md'>
-											<Link to='/signup'>Register</Link>
-										</button>
-									</p>
-								</label>
-							</div>
-							<div className='form-control mt-6'>
-								<button className='btn btn-primary'>Login</button>
-							</div>
-						</form>
+		<div className='h-[800px] flex justify-center items-center'>
+			<Toaster></Toaster>
+			<div className='w-96 p-7 border-2 border-gray-800 rounded-xl'>
+				<h2 className='text-xl text-center'>Login</h2>
+				<form onSubmit={handleSubmit(handleLogin)}>
+					<div className='form-control w-full max-w-xs'>
+						<label className='label'>
+							<span className='label-text'>Email</span>
+						</label>
+						<input
+							type='text'
+							{...register('email', {
+								required: 'Email Address is required',
+							})}
+							className='input input-bordered w-full max-w-xs'
+						/>
+						{errors.email && (
+							<p className='text-red-600'>{errors.email?.message}</p>
+						)}
 					</div>
-				</div>
+
+					<div className='form-control mb-3 w-full max-w-xs'>
+						<label className='label'>
+							<span className='label-text'>Password</span>
+						</label>
+						<input
+							type='password'
+							{...register('password', {
+								required: 'Password is required',
+								minLength: {
+									value: 6,
+									message: 'Password must be 6 characters or longer',
+								},
+							})}
+							className='input input-bordered w-full max-w-xs'
+						/>
+
+						{errors.password && (
+							<p className='text-red-600'>{errors.password?.message}</p>
+						)}
+					</div>
+
+					<input
+						className='btn bg-green-500 hover:bg-green-600 border-0 text-white w-full'
+						value='Login'
+						type='submit'
+					/>
+
+					<div>
+						{loginError && <p className='text-red-600'>{loginError}</p>}
+					</div>
+				</form>
+				<p>
+					Create new Account
+					<Link className='text-secondary m-3' to='/signup'>
+						Sign Up
+					</Link>
+				</p>
+				<div className='divider'>OR</div>
+				<button className='btn btn-outline hover:bg-red-400 w-full'>
+					CONTINUE WITH GOOGLE
+				</button>
 			</div>
 		</div>
 	);
-};;
+};
 
 export default Login;
