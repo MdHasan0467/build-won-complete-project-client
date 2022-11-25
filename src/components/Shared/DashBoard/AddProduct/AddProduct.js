@@ -13,7 +13,7 @@ const AddProduct = () => {
 		formState: { errors },
 	} = useForm();
 
-	const time = String(new Date());
+	const time = String(new Date()).slice(0, 21);
 
 	const navigate = useNavigate();
 	//! from .env.local file====>
@@ -95,10 +95,10 @@ const AddProduct = () => {
 										className='input input-bordered w-full max-w-xs'
 									/>
 									{errors.title && (
-										<p className='text-red-500'>{errors.title.message}</p>
+										<p className='text-red-500'>{errors.title?.message}</p>
 									)}
 								</div>
-								<div className='form-control  w-full max-w-xs'>{user.displayName}</div>
+								<div className='form-control  w-full max-w-xs'>{user?.displayName}</div>
 							</div>
 							<div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
 								<div className='form-control w-full max-w-xs'>

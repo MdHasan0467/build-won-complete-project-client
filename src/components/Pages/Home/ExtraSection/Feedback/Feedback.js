@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 const Feedback = () => {
     	const {register,handleSubmit,formState: { errors },} = useForm();
     return (
-			<div className='flex justify-center bg-slate-300'>
-				<form>
+			<div className='flex justify-center my-28 '>
+				<form className='mt-10 border-2 border-gray-900 p-5 rounded-lg'>
 					<div className='form-control w-[300px]'>
 						<label className='label'>
 							<span className='label-text'>Your Email</span>
@@ -27,7 +27,7 @@ const Feedback = () => {
 						</label>
 						<input
 							type='text'
-							placeholder='Give here your experience'
+							placeholder='Give here experience your'
 							{...register('text', {
 								required: true,
 							})}

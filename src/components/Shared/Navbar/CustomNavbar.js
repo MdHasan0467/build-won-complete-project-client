@@ -45,16 +45,16 @@ const CustomNavbar = () => {
 								}
 							>
 								<Dropdown.Header>
-									<span className='block text-sm'>{user?.displayName}</span>
-									<span className='block truncate text-sm font-medium'>
+									<span className='block text-sm font-bold'>{user?.displayName}</span>
+									<span className='block truncate text-sm font-medium '>
 										{user?.email}
 									</span>
 								</Dropdown.Header>
-								<Dropdown.Item>
+								<Dropdown.Item className='hover:bg-green-400 w-full py-2 flex justify-start'>
 									<Link to='/dashboard'>Dashboard</Link>
 								</Dropdown.Item>
 								<Dropdown.Divider />
-								<Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
+								<Dropdown.Item onClick={handleLogOut} className='hover:bg-green-400 w-full py-2 flex justify-start'>Sign out</Dropdown.Item>
 							</Dropdown>
 							<Navbar.Toggle />
 						</div>
@@ -62,12 +62,12 @@ const CustomNavbar = () => {
 					<Navbar.Collapse>
 						{user && (
 							<>
-								<Link to='/home'>Home</Link>
-								<Link to='/'>FAQ</Link>
+								<Link className='hover:bg-green-400 px-3 py-2 rounded-lg' to='/home'>Home</Link>
+								<Link className='hover:bg-green-400 px-3 py-2 rounded-lg' to='/'>FAQ</Link>
 							</>
 						)}
-						<Link to='/'>About</Link>
-						{!user && <Link to='/login'>Login</Link>}
+						<Link className='hover:bg-green-400 px-3 py-2 rounded-lg' to='/'>About</Link>
+						{!user && <Link className='hover:bg-green-400 px-3 py-2 rounded-lg' to='/login'>Login</Link>}
 					</Navbar.Collapse>
 				</Navbar>
 			</div>

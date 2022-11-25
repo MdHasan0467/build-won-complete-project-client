@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { BsStopwatch } from 'react-icons/bs';
 
 const MyProducts = () => {
 
@@ -104,9 +105,9 @@ const MyProducts = () => {
 									</span>
 									{product.description}
 								</p>
-								<p>
-									<span className='text-bold text-gray-800 text-xl'>
-										Time :
+								<p className='flex'>
+									<span className='text-bold text-gray-800 text-2xl text-green-600'>
+										<BsStopwatch></BsStopwatch>
 									</span>
 									{product.time}
 								</p>

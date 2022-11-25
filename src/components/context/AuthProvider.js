@@ -7,8 +7,10 @@ export const AuthContext = createContext()
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    console.log(user);
+	const [loading, setLoading] = useState(true);
+	
+	// const tenantId = '';
+	// auth.tenantId = tenantId;
 
 	const googleProvider = new GoogleAuthProvider();
 	//!<===================================>
@@ -32,7 +34,7 @@ const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-			// console.log('user inside auth state change', currentUser);
+			console.log('user inside auth state change', currentUser);
 			setUser(currentUser);
 			setLoading(false);
 		});

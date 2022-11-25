@@ -21,7 +21,8 @@ const Signup = () => {
 		const email = form.email.value;
 		const password = form.password.value;
 		const photoURL = form.profile.value;
-		console.log(name, photoURL, email, password);
+		const identity = form.identity.value;
+		console.log(name, photoURL, email, password, identity);
 
 		//! Regex for password validation...
 		if (password.length < 6) {
@@ -54,10 +55,10 @@ const Signup = () => {
 				setPasswordError(error.message);
 			});
 	};
-	const updateUserDetails = (name, photoURL) => {
-		userprofile(name, photoURL)
+	const updateUserDetails = (name, photoURL, identity) => {
+		userprofile(name, photoURL, identity)
 			.then(() => {
-				console.log('Profile Updated');
+				// console.log('Profile Updated');
 			})
 			.catch((error) => {
 				console.error(error);
@@ -119,6 +120,26 @@ const Signup = () => {
 										required
 									/>
 								</div>
+								<div className='form-control'>
+									<label className='label'>
+										<span className='label-text'>Who are you ?</span>
+									</label>
+									<select
+										className='select select-success w-full max-w-xs'
+										name='identity'
+									>
+										<option>Seller</option>
+										<option>Buyer</option>
+									</select>
+								</div>
+								<p className='text-red-700'>
+									<small>{passwordError}</small>
+								</p>
+								{success && (
+									<p className='text-green-600'>
+										<small>Registration Successful</small>
+									</p>
+								)}
 								<div className='form-control mt-6'>
 									<button className='btn btn-primary'>SignUp</button>
 								</div>

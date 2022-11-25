@@ -12,7 +12,7 @@ const Home = () => {
         return <Loader></Loader>
     }
     return (
-        <div className='my-2'>           
+        <div className='m-2'>           
             <CustomCarousel></CustomCarousel>  
             <Advertisement></Advertisement>
             <ProductCategory></ProductCategory>

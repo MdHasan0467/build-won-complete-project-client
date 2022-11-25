@@ -1,9 +1,15 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import DeshboardDesign from '../../DeshboardDesign/DeshboardDesign';
 import Home from '../../Pages/Home/Home';
 import Login from '../../Pages/Login/Login';
+import MercedesGroup from '../../Pages/MercedesGroup/MercedesGroup';
+import RollsGroup from '../../Pages/RollsGroup/RollsGroup';
 import Signup from '../../Pages/Signup/Signup';
+import TeslaGroup from '../../Pages/TeslaGroup/TeslaGroup';
 import AddProduct from '../../Shared/DashBoard/AddProduct/AddProduct';
+import AllBuyers from '../../Shared/DashBoard/AllBuyers/AllBuyers';
+import AllSeller from '../../Shared/DashBoard/AllSeller/AllSeller';
 import DashBoard from '../../Shared/DashBoard/DashBoard';
 import MyOrders from '../../Shared/DashBoard/MyOrders/MyOrders';
 import MyProducts from '../../Shared/DashBoard/MyProducts/MyProducts';
@@ -24,6 +30,18 @@ const Route = () => {
 						element: <Home></Home>,
 					},
 					{
+						path: '/tesla',
+						element: <TeslaGroup></TeslaGroup>,
+					},
+					{
+						path: '/rolls',
+						element: <RollsGroup></RollsGroup>,
+					},
+					{
+						path: '/mercedes',
+						element: <MercedesGroup></MercedesGroup>,
+					},
+					{
 						path: '/login',
 						element: <Login></Login>,
 					},
@@ -42,12 +60,24 @@ const Route = () => {
 						element: <AddProduct></AddProduct>,
 					},
 					{
+						path: '/dashboard',
+						element: <DeshboardDesign></DeshboardDesign>
+					},
+					{
 						path: '/dashboard/myProduct',
 						element: <MyProducts></MyProducts>,
 					},
 					{
 						path: '/dashboard/myOrders',
 						element: <MyOrders></MyOrders>,
+					},
+					{
+						path: '/dashboard/allSeller',
+						element: <AllSeller></AllSeller>,
+					},
+					{
+						path: '/dashboard/allBuyers',
+						element: <AllBuyers></AllBuyers>,
 					},
 				],
 			},
