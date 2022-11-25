@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import DeshboardDesign from '../../DeshboardDesign/DeshboardDesign';
+import Error from '../../Error/Error';
 import FAQ from '../../Pages/FAQ/FAQ';
 import Home from '../../Pages/Home/Home';
 import Login from '../../Pages/Login/Login';
@@ -89,7 +90,7 @@ const Route = () => {
 			},
 			{
 				path: '*',
-				element: <h1>Error Page</h1>,
+				element: <Error></Error>
 			},
 		]);
     return (

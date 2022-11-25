@@ -13,12 +13,24 @@
 5. npm install firebase
 6. npm install react-hook-form
 7. npm install react-icons --save
+8. npm install axios
+9. npm i @tanstack/react-query
 
 
 
 
 
+### I am using useQuery/ Tanstack Query a lots of time. like as -
+# components are...
+* Deshboard.js
+* TeslaGroup.js
+* MercedisGroup.js
+* and more...
 
+
+
+### I am using one time axios.js
+* RollsGroup.js 
 
 
 

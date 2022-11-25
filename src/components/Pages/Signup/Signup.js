@@ -79,7 +79,7 @@ const Signup = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
-				navigate('/login')
+				navigate('/')
 				// setCreatedUserEmail(email);
 			});
 	};

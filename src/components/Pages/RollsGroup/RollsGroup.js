@@ -1,23 +1,34 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+// import { useQuery } from '@tanstack/react-query';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
+import axios from 'axios'
 
 const RollsGroup = () => {
-    const {loading} = useContext(AuthContext)
+	const { loading } = useContext(AuthContext)
+	const [rollsDatas, setRollsDatas] = useState([])
 	//! fetch for getting rollsDatas data from mongodb.....
-	const { data: rollsDatas } = useQuery({
-		queryKey: ['rollsDatas'],
-		queryFn: async () => {
-			try {
-				const res = await fetch('http://localhost:5000/rollsDatas');
-				const data = await res.json();
-				return data;
-			} catch (err) {
-				console.error(err);
-			}
-		},
-    });
+	// const { data: rollsDatas } = useQuery({
+	// 	queryKey: ['rollsDatas'],
+	// 	queryFn: async () => {
+	// 		try {
+	// 			const res = await fetch('http://localhost:5000/rollsDatas');
+	// 			const data = await res.json();
+	// 			return data;
+	// 		} catch (err) {
+	// 			console.error(err);
+	// 		}
+	// 	},
+    // });
+
+	useEffect(() => {
+		axios.get('http://localhost:5000/rollsDatas')
+			.then(data => {
+				console.log(data);
+				setRollsDatas(data.data)
+		})
+	}, [])
+
     
 	// console.log(rollsDatas);
 

@@ -6,11 +6,12 @@ import { AuthContext } from '../../Context/AuthProvider';
 // import useToken from '../../../hook/useToken';
 
 const Login = () => {
-	const {register,
+	const {
+		register,
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const { logIn, loading } = useContext(AuthContext);
+	const { logIn, googleSignUp, loading } = useContext(AuthContext);
 	const [loginError, setLoginError] = useState('');
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -19,9 +20,6 @@ const Login = () => {
 
 	const from = location.state?.from?.pathname || '/';
 	const toaster = location.state?.toast || false;
-
-
-
 
 	if (toaster) {
 		toast.error(`Ohh, sorry!
@@ -42,10 +40,10 @@ const Login = () => {
 				const user = result.user;
 				console.log(user);
 
-				fetch('http://localhost:5000/users')
-					.then(usersData => {
-					console.log(usersData)
-				}).catch(err => console.log(err))
+				// fetch('http://localhost:5000/users')
+				// 	.then(usersData => {
+				// 	console.log(usersData)
+				// }).catch(err => console.log(err))
 
 				navigate(from, { replace: true });
 				toast.success('Successfully Login.');
@@ -56,6 +54,36 @@ const Login = () => {
 				toast.error('Sorry! Try again with valid user');
 			});
 	};
+	//! Google Log In....
+	const handleGooleLogIn = () => {
+		googleSignUp()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+
+				fetch('http://localhost:5000/users', {
+					method: 'POST',
+					headers: {
+						'content-type': 'application/json',
+					},
+					body: JSON.stringify(user),
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						console.log(data);
+						navigate('/');
+						// setCreatedUserEmail(email);
+					});
+
+
+				navigate(from, { replace: true });
+				toast.success('Successfully Login!');
+			})
+			.catch((error) => console.error(error));
+	};
+	//!......................................
+
+	
 	return (
 		<div className='h-[800px] flex justify-center items-center'>
 			<Toaster></Toaster>
@@ -116,7 +144,10 @@ const Login = () => {
 					</Link>
 				</p>
 				<div className='divider'>OR</div>
-				<button className='btn btn-outline hover:bg-red-400 w-full'>
+				<button
+					onClick={handleGooleLogIn}
+					className='btn btn-outline hover:bg-red-400 w-full'
+				>
 					CONTINUE WITH GOOGLE
 				</button>
 			</div>
