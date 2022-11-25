@@ -25,7 +25,34 @@ const MercedesGroup = () => {
 	return (
 		<div>
 			<h1 className='my-3'>Total Car : {mercedesDatas?.length}</h1>
-			
+			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+				{mercedesDatas?.map((mercedesData) => (
+					<div className='card w-96 bg-base-100 shadow-xl'>
+						<figure>
+							<img
+								className='w-full h-[200px]'
+								src={mercedesData?.image}
+								alt='Shoes'
+							/>
+						</figure>
+						<div className='card-body'>
+							<h2 className='card-title'>
+								Brand Name: {mercedesData?.title}
+								<div className='badge badge-secondary text-white'>NEW</div>
+							</h2>
+							<p className='text-start'>Exposure time : {mercedesData?.time}</p>
+							<p className='text-start'>
+								Resale Price : ${mercedesData?.resalePrice}
+							</p>
+							<div className='card-actions justify-end'>
+								<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
+									Book Now
+								</div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
