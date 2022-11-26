@@ -59,15 +59,12 @@ const ProductCategory = () => {
 					</figure>
 					<div className='card-body'>
 						<h2 className='card-title'>
-							Brand Name : {rolls?.title}
-							<div className='badge badge-secondary text-white'>NEW</div>
+							Brand : {rolls?.category}
 						</h2>
+						<p className='text-start'>Model : {rolls?.title}</p>
 						<p className='text-start'>Exposure time : {rolls?.time}</p>
 						<p className='text-start'>Resale Price : $ {rolls?.resalePrice}</p>
 						<div className='card-actions justify-end'>
-							<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
-								Book Now
-							</div>
 							<div className='btn btn-sm mx-2 bg-blue-500 hover:bg-blue-600 border-0 text-white'>
 								<Link to='/rolls'>See More</Link>
 							</div>
@@ -80,15 +77,12 @@ const ProductCategory = () => {
 					</figure>
 					<div className='card-body'>
 						<h2 className='card-title'>
-							Brand Name: {tesla?.title}
-							<div className='badge badge-secondary text-white'>NEW</div>
+							Brand : {tesla?.category}
 						</h2>
+						<p className='text-start'>Model : {tesla?.title}</p>
 						<p className='text-start'>Exposure time : {tesla?.time}</p>
 						<p className='text-start'>Resale Price : ${tesla?.resalePrice}</p>
 						<div className='card-actions justify-end'>
-							<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
-								Book Now
-							</div>
 							<div className='btn btn-sm mx-2 bg-blue-500 hover:bg-blue-600 border-0 text-white'>
 								<Link to='/tesla'>See More</Link>
 							</div>
@@ -106,17 +100,14 @@ const ProductCategory = () => {
 					</figure>
 					<div className='card-body'>
 						<h2 className='card-title'>
-							Brand Name : {mercedes?.title}
-							<div className='badge badge-secondary text-white'>NEW</div>
+							Brand : {mercedes?.category}
 						</h2>
+						<p className='text-start'>Model : {mercedes?.title}</p>
 						<p className='text-start'>Exposure time : {mercedes?.time}</p>
 						<p className='text-start'>
 							Resale Price : ${mercedes?.resalePrice}
 						</p>
 						<div className='card-actions justify-end'>
-							<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
-								Book Now
-							</div>
 							<div className='btn btn-sm mx-2 bg-blue-500 hover:bg-blue-600 border-0 text-white'>
 								<Link to='/mercedes'>See More</Link>
 							</div>

@@ -81,6 +81,24 @@ const CustomNavbar = ({ users }) => {
 							>
 								FAQ
 							</Link>
+							<Link
+								className='hover:bg-green-400 px-3 py-2 rounded-lg'
+								to='/mercedes'
+							>
+								Mercedes
+							</Link>
+							<Link
+								className='hover:bg-green-400 px-3 py-2 rounded-lg'
+								to='/rolls'
+							>
+								Rolls Royce
+							</Link>
+							<Link
+								className='hover:bg-green-400 px-3 py-2 rounded-lg'
+								to='/tesla'
+							>
+								Tesla
+							</Link>
 						</>
 					)}
 					<Link className='hover:bg-green-400 px-3 py-2 rounded-lg' to='/'>
@@ -96,6 +114,7 @@ const CustomNavbar = ({ users }) => {
 					)}
 				</Navbar.Collapse>
 			</Navbar>
+			
 		</div>
 	);
 };

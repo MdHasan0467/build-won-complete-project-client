@@ -1,40 +1,32 @@
-// import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
-import axios from 'axios'
+import { Checkmark } from 'react-checkmark';
+import BookModal from '../../Shared/BookModal/BookModal';
 
 const RollsGroup = () => {
-	const { loading } = useContext(AuthContext)
-	const [rollsDatas, setRollsDatas] = useState([])
+	const [selected, setSelected] = useState(null)
+	const { loading, user } = useContext(AuthContext);
 	//! fetch for getting rollsDatas data from mongodb.....
-	// const { data: rollsDatas } = useQuery({
-	// 	queryKey: ['rollsDatas'],
-	// 	queryFn: async () => {
-	// 		try {
-	// 			const res = await fetch('http://localhost:5000/rollsDatas');
-	// 			const data = await res.json();
-	// 			return data;
-	// 		} catch (err) {
-	// 			console.error(err);
-	// 		}
-	// 	},
-    // });
+	const { data: rollsDatas } = useQuery({
+		queryKey: ['rollsDatas'],
+		queryFn: async () => {
+			try {
+				const res = await fetch('http://localhost:5000/rollsDatas');
+				const data = await res.json();
+				return data;
+			} catch (err) {
+				console.error(err);
+			}
+		},
+	});
 
-	useEffect(() => {
-		axios.get('http://localhost:5000/rollsDatas')
-			.then(data => {
-				console.log(data);
-				setRollsDatas(data.data)
-		})
-	}, [])
+	console.log(rollsDatas);
 
-    
-	// console.log(rollsDatas);
-
-    if (loading) {
-        return <Loader></Loader>
-    }
+	if (loading) {
+		return <Loader></Loader>;
+	}
 	return (
 		<div>
 			<img
@@ -56,10 +48,9 @@ const RollsGroup = () => {
 						<div className='card-body'>
 							<h2 className='card-title'>
 								Brand Name: {rollsData?.title}
-								<div className='badge badge-secondary text-white'>NEW</div>
 							</h2>
 							<p className='text-start'>Exposure time : {rollsData?.time}</p>
-							
+
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Category :
@@ -102,21 +93,28 @@ const RollsGroup = () => {
 								</span>
 								{rollsData.description}
 							</p>
-							
+
 							{rollsData.author && (
-								<p className='text-start'>
+								<p className='text-start flex'>
 									<span className='text-bold text-gray-800 text-xl'>
-										Author Name :
+										Seller :
 									</span>
-									{rollsData.author}
+									<span className='flex ml-2'>
+										{rollsData.author} <Checkmark size='small' color='blue' />
+									</span>
 								</p>
 							)}
 							<div className='card-actions justify-end'>
-								<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
+								<label
+									onClick={() => setSelected(rollsData)}
+									htmlFor='booking-modal'
+									className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
+								>
 									Book Now
-								</div>
+								</label>
 							</div>
 						</div>
+						<BookModal selected={selected}></BookModal>
 					</div>
 				))}
 			</div>
@@ -125,3 +123,4 @@ const RollsGroup = () => {
 };
 
 export default RollsGroup;
+

@@ -15,6 +15,7 @@
 7. npm install react-icons --save
 8. npm install axios
 9. npm i @tanstack/react-query
+10. npm i react-checkmark (use by --force)
 
 
 

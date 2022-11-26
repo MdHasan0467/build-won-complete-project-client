@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
+import { Checkmark } from 'react-checkmark';
+import BookModal from '../../Shared/BookModal/BookModal';
 
 const TeslaGroup = () => {
-    const {loading} = useContext(AuthContext)
+	const { loading, user } = useContext(AuthContext);
+	const [selected, setSelected] = useState(null)
 	//! fetch for getting teslaDatas data from mongodb.....
 	const { data: teslaDatas } = useQuery({
 		queryKey: ['teslaDatas'],
@@ -19,9 +22,9 @@ const TeslaGroup = () => {
 		},
 	});
 	// console.log(teslaDatas);
-     if (loading) {
-				return <Loader></Loader>;
-			}
+	if (loading) {
+		return <Loader></Loader>;
+	}
 	return (
 		<div>
 			<img
@@ -43,10 +46,9 @@ const TeslaGroup = () => {
 						<div className='card-body'>
 							<h2 className='card-title'>
 								Brand Name: {teslaData?.title}
-								<div className='badge badge-secondary text-white'>NEW</div>
 							</h2>
 							<p className='text-start'>Exposure time : {teslaData?.time}</p>
-							
+
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Category :
@@ -89,22 +91,27 @@ const TeslaGroup = () => {
 								</span>
 								{teslaData.description}
 							</p>
-							
+
 							{teslaData.author && (
-								<p className='text-start'>
+								<p className='text-start flex'>
 									<span className='text-bold text-gray-800 text-xl'>
-										Author Name :
+										Seller :
 									</span>
-									{teslaData.author}
+									<span className='flex ml-2'>
+										{teslaData.author} <Checkmark size='small' color='blue' />
+									</span>
 								</p>
 							)}
-
 							<div className='card-actions justify-end'>
-								<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
+								<label onClick={() => setSelected(teslaData)}
+									htmlFor='booking-modal'
+									className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
+								>
 									Book Now
-								</div>
+								</label>
 							</div>
 						</div>
+						<BookModal selected={selected}></BookModal>
 					</div>
 				))}
 			</div>

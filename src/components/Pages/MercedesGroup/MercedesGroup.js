@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
+import { Checkmark } from 'react-checkmark';
+import BookModal from '../../Shared/BookModal/BookModal';
 
 const MercedesGroup = () => {
-    const {loading} = useContext(AuthContext)
+	const { loading, } = useContext(AuthContext);
+	const [selected, setSelected] = useState(null)
 	//! fetch for getting mercedesDatas data from mongodb.....
-	const { data: mercedesDatas } = useQuery({
+	const { data: mercedesDatas =[] } = useQuery({
 		queryKey: ['mercedesDatas'],
 		queryFn: async () => {
 			try {
@@ -18,10 +21,12 @@ const MercedesGroup = () => {
 			}
 		},
 	});
+
+	
 	// console.log(mercedesDatas);
-     if (loading) {
-				return <Loader></Loader>;
-			}
+	if (loading) {
+		return <Loader></Loader>;
+	}
 	return (
 		<div>
 			<img
@@ -43,10 +48,9 @@ const MercedesGroup = () => {
 						<div className='card-body'>
 							<h2 className='card-title'>
 								Brand Name: {mercedesData?.title}
-								<div className='badge badge-secondary text-white'>NEW</div>
 							</h2>
 							<p className='text-start'>Exposure time : {mercedesData?.time}</p>
-							
+
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Category :
@@ -89,21 +93,34 @@ const MercedesGroup = () => {
 								</span>
 								{mercedesData.description}
 							</p>
-							
+
 							{mercedesData.author && (
-								<p className='text-start'>
+								<p className='text-start flex'>
 									<span className='text-bold text-gray-800 text-xl'>
-										Author Name :
+										Seller :
 									</span>
-									{mercedesData.author}
+									<span className='flex ml-2'>
+										{mercedesData.author}
+										<Checkmark size='small' color='blue' />
+									</span>
 								</p>
 							)}
 							<div className='card-actions justify-end'>
-								<div className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
-									Book Now
-								</div>
+								<button>
+									<label
+										onClick={() => setSelected(mercedesData)}
+										htmlFor='booking-modal'
+										className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
+									>
+										Book Now
+									</label>
+								</button>
 							</div>
 						</div>
+						<BookModal
+							selected={selected}
+							setSelected={setSelected}
+						></BookModal>
 					</div>
 				))}
 			</div>

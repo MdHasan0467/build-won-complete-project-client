@@ -33,17 +33,21 @@ const Advertisement = () => {
 								</figure>
 								<div className='card-body'>
 									<h2 className='card-title'>{category?.title}</h2>
-									<p>
+									<p className='text-start'>
 										<span>Brand Name :</span> {category?.category}
 									</p>
-									<p>
+									<p className='text-start'>
 										<span>Resale Price:</span> {category?.resalePrice}
 									</p>
-									<div className='card-actions justify-end'>
-										<button className='btn btn-sm mx-2 bg-green-500 hover:bg-green-600 border-0 text-white'>
-											Book now
-										</button>
+									
+									<div className="rating">
+                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
+                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" checked />
+                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
+                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
+                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
 									</div>
+									
 								</div>
 							</div>
 						))}

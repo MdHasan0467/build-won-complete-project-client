@@ -34,15 +34,27 @@ const Route = () => {
 					},
 					{
 						path: '/tesla',
-						element: <TeslaGroup></TeslaGroup>,
+						element: (
+							<PrivateRoute>
+								<TeslaGroup></TeslaGroup>
+							</PrivateRoute>
+						),
 					},
 					{
 						path: '/rolls',
-						element: <RollsGroup></RollsGroup>,
+						element: (
+							<PrivateRoute>
+								<RollsGroup></RollsGroup>
+							</PrivateRoute>
+						),
 					},
 					{
 						path: '/mercedes',
-						element: <MercedesGroup></MercedesGroup>,
+						element: (
+							<PrivateRoute>
+								<MercedesGroup></MercedesGroup>
+							</PrivateRoute>
+						),
 					},
 					{
 						path: '/faq',
@@ -60,7 +72,12 @@ const Route = () => {
 			},
 			{
 				path: '/dashboard',
-				element:<PrivateRoute> <DashBoard></DashBoard></PrivateRoute>,
+				element: (
+					<PrivateRoute>
+						
+						<DashBoard></DashBoard>
+					</PrivateRoute>
+				),
 				children: [
 					{
 						path: '/dashboard/addProduct',
@@ -68,7 +85,7 @@ const Route = () => {
 					},
 					{
 						path: '/dashboard',
-						element: <DeshboardDesign></DeshboardDesign>
+						element: <DeshboardDesign></DeshboardDesign>,
 					},
 					{
 						path: '/dashboard/myProduct',
@@ -90,7 +107,7 @@ const Route = () => {
 			},
 			{
 				path: '*',
-				element: <Error></Error>
+				element: <Error></Error>,
 			},
 		]);
     return (

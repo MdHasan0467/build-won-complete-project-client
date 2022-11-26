@@ -13,6 +13,7 @@
     "flowbite": "^1.5.4",
     "flowbite-react": "^0.3.5",
     "react": "^18.2.0",
+    "react-checkmark": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.5",
     "react-hot-toast": "^2.4.0",
