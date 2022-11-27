@@ -1,13 +1,11 @@
-const reportWebVitals = onPerfEntry => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
+import React from 'react';
+
+const reportWebVitals = () => {
+  return (
+		<div>
+			<h1>My Whish List</h1>
+		</div>
+	);
 };
 
 export default reportWebVitals;

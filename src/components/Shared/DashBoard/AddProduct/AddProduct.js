@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
+import Loader from '../../../Loader/Loader';
 
 const AddProduct = () => {
-	const { user, loader } = useContext(AuthContext);
+	const { user, loading } = useContext(AuthContext);
 	const {
 		register,
 		handleSubmit,
@@ -69,6 +70,10 @@ const AddProduct = () => {
 				}
 			});
 	};
+	
+	if (loading) {
+		return <Loader></Loader>;
+	}
 
 	return (
 		<div className='bg-base-200'>

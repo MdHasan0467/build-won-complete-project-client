@@ -116,11 +116,13 @@ const MercedesGroup = () => {
 									</button>
 								</div>
 							)}
+
 							{logUser?.role === 'Seller' && (
 								<p className='text-emerald-600 font-serif font-bold my-2'>
 									Only buyer can book this product
 								</p>
 							)}
+							
 							{logUser?.role === 'admin' && (
 								<p className='text-emerald-600 font-serif font-bold my-2'>
 									Only buyer can book this product

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
-import { BsStopwatch } from 'react-icons/bs';
+import Loader from '../../../Loader/Loader';
 
 const MyProducts = () => {
-	const { user } = useContext(AuthContext);
+	const { user, loading } = useContext(AuthContext);
 	//! fetch for getting products data from mongodb.....
 
 	const url = `http://localhost:5000/products?email=${user?.email}`;
@@ -41,6 +41,10 @@ const MyProducts = () => {
 				}
 			});
 	};
+
+	if (loading) {
+		return <Loader></Loader>;
+	}
 	
 	return (
 		<div className='mx-12'>

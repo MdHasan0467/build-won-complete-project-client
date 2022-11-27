@@ -16,6 +16,7 @@ import AllSeller from '../../Shared/DashBoard/AllSeller/AllSeller';
 import DashBoard from '../../Shared/DashBoard/DashBoard';
 import MyOrders from '../../Shared/DashBoard/MyOrders/MyOrders';
 import MyProducts from '../../Shared/DashBoard/MyProducts/MyProducts';
+import MyWishList from '../../Shared/DashBoard/MyWishList/MyWishList';
 import Main from '../Main/Main';
 
 const Route = () => {
@@ -74,7 +75,6 @@ const Route = () => {
 				path: '/dashboard',
 				element: (
 					<PrivateRoute>
-						
 						<DashBoard></DashBoard>
 					</PrivateRoute>
 				),
@@ -94,6 +94,10 @@ const Route = () => {
 					{
 						path: '/dashboard/myOrders',
 						element: <MyOrders></MyOrders>,
+					},
+					{
+						path: '/dashboard/myWishList',
+						element: <MyWishList></MyWishList>
 					},
 					{
 						path: '/dashboard/allSeller',

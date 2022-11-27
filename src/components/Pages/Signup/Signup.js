@@ -49,7 +49,7 @@ const Signup = () => {
 				setSuccess(true);
 				form.reset();
 				updateUserDetails(name, photoURL);
-				saveUsers(name, email, role);
+				saveUsers(name, email, role, photoURL);
 			})
 
 			.catch((error) => {
@@ -67,8 +67,8 @@ const Signup = () => {
 			});
 	};
 
-	const saveUsers = (name, email, role) => {
-		const user = { name, email, role };
+	const saveUsers = (name, email, role, photoURL) => {
+		const user = { name, email, role, photoURL };
 		fetch('https://assignment-twelve-server.vercel.app/users', {
 			method: 'POST',
 			headers: {

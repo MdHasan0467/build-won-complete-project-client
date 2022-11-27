@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
-import { json, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 // import useToken from '../../../hook/useToken';
 
@@ -61,7 +61,7 @@ const Login = () => {
 				const user = result.user;
 				console.log(user);
 
-				fetch('https://assignment-twelve-server.vercel.app/users', {
+				fetch('http://localhost:5000/googlebuyer', {
 					method: 'POST',
 					headers: {
 						'content-type': 'application/json',

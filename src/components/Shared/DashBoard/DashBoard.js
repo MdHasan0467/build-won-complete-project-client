@@ -86,6 +86,9 @@ const DashBoard = () => {
 								<li>
 									<Link to='/dashboard/myOrders'>My Orders</Link>
 								</li>
+								<li>
+									<Link to='/dashboard/myWishList'>My WhishList</Link>
+								</li>
 							</>
 						)}
 

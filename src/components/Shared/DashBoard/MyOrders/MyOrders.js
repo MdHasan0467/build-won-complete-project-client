@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const MyOrders = () => {
+		const { user, loading } = useContext(AuthContext);
 	const [orders, setOrders] = useState();
 
 	useEffect(() => {
 		axios
-			.get(`https://assignment-twelve-server.vercel.app/bookingData`)
+			.get(`http://localhost:5000/myorders?email=${user?.email}`)
 			.then((data) => setOrders(data.data));
-	}, []);
+	}, [user?.email]);
+	console.log(orders);
 	return (
 		<div className='mx-12 bg-transparent'>
 			<h1 className='my-5'>My Total orders : {orders?.length}</h1>
