@@ -8,10 +8,34 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+		const [logUser, setLogUser] = useState();
 
 	const googleProvider = new GoogleAuthProvider();
 	//!<===================================>
 	//!<===================================>
+
+
+			useEffect(() => {
+				console.log(user?.email);
+				fetch(`http://localhost:5000/users/${user?.email}`)
+					.then((res) => res.json())
+					.then((result) => {
+						// console.log(result[0]);
+						setLogUser(result[0]);
+					});
+			}, [user?.email]);
+
+			console.log(logUser?.role);
+			
+
+
+
+
+
+
+
+
+
 
 	//! Create User....
 	const createSignUp = (email, password) => {
@@ -33,7 +57,7 @@ const AuthProvider = ({ children }) => {
 	// onAuthStateChanged method onekta server er moto kaj kore,.,,,, user change hocce kina seita kheyal rakhe & sei onujaee output dekhay
 	useEffect(() => {
 		const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-			console.log('user inside auth state change', currentUser);
+			// console.log('user inside auth state change', currentUser);
 			setUser(currentUser);
 			setLoading(false);
 		});
@@ -64,6 +88,7 @@ const AuthProvider = ({ children }) => {
 	//!......................................
 
 	const authInfo = {
+		logUser,
 		user,
 		loading,
 		createSignUp,

@@ -3,9 +3,11 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
+import { BsFillBookmarkStarFill } from 'react-icons/bs';
 
 const CustomNavbar = ({ users }) => {
-	const { user, logOut } = useContext(AuthContext);
+	
+	const { logUser,user, logOut } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const handleLogOut = () => {
@@ -45,9 +47,12 @@ const CustomNavbar = ({ users }) => {
 							}
 						>
 							<Dropdown.Header>
-								<span className='block text-sm font-bold'>
-									{user?.displayName}
-								</span>
+								<div className='userName flex justify-center'>
+									<span className='block text-sm font-bold'>
+										{user?.displayName}
+									</span>
+									<span>{logUser?.role === 'admin' && <BsFillBookmarkStarFill className='text-green-600 mt-1 ml-2'></BsFillBookmarkStarFill>}</span>
+								</div>
 								<span className='block truncate text-sm font-medium '>
 									{user?.email}
 								</span>
@@ -114,7 +119,6 @@ const CustomNavbar = ({ users }) => {
 					)}
 				</Navbar.Collapse>
 			</Navbar>
-			
 		</div>
 	);
 };

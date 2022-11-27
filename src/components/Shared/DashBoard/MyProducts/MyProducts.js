@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
+import { useContext } from 'react';
 import { BsStopwatch } from 'react-icons/bs';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const MyProducts = () => {
+	const {user} = useContext(AuthContext)
 	//! fetch for getting products data from mongodb.....
 	const { data: products } = useQuery({
 		queryKey: ['products'],
 		queryFn: async () => {
 			try {
-				const res = await fetch('http://localhost:5000/products');
+				const res = await fetch(`http://localhost:5000/products/${user?.email}`);
 				const data = await res.json();
 				return data;
 			} catch (err) {
@@ -37,7 +40,7 @@ const MyProducts = () => {
 			});
 	};
 
-	// console.log(products);
+	console.log(products);
 	return (
 		<div className='mx-12'>
 			<h1>My Products{products?.length}</h1>

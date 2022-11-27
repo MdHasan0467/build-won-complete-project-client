@@ -38,6 +38,7 @@ const AddProduct = () => {
 
 					const addedProduct = {
 						author: user.displayName,
+						authorEmail: user.email,
 						title: data.title,
 						location: data.location,
 						category: data.category,
@@ -62,9 +63,9 @@ const AddProduct = () => {
 					})
 						.then((res) => res.json())
 						.then((result) => {
-							console.log(result);
-							toast.success('Successfully created a new Product!!');
+							// console.log(result);
 							navigate('/dashboard/myProduct');
+							toast.success('Successfully created a new Product!!');
 						});					
 				}
 			});

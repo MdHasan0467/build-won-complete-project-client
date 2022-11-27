@@ -46,7 +46,7 @@ const ProductCategory = () => {
 			}
 		},
 	});
-	console.log(mercedes);
+	// console.log(mercedes);
 	return (
 		<div className='my-16'>
 			<h1 className='flex justify-start text-2xl text-gray-900 font-bold font-serif my-2 ml-5 underline'>
