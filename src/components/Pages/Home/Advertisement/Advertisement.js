@@ -8,7 +8,7 @@ const Advertisement = () => {
 		queryFn: async () => {
 			try {
 				const res = await fetch(
-					'http://localhost:5000/advertisement/categories'
+					'https://assignment-twelve-server.vercel.app/advertisement/categories'
 				);
 				const data = await res.json();
 				return data;
@@ -17,7 +17,7 @@ const Advertisement = () => {
 			}
 		},
 	});
-    console.log(categories);
+	console.log(categories);
 	return (
 		<div className='mt-10'>
 			{categories?.length > 0 && (
@@ -39,15 +39,35 @@ const Advertisement = () => {
 									<p className='text-start'>
 										<span>Resale Price:</span> {category?.resalePrice}
 									</p>
-									
-									<div className="rating">
-                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
-                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" checked />
-                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
-                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
-                                         <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
+
+									<div className='rating'>
+										<input
+											type='radio'
+											name='rating-4'
+											className='mask mask-star-2 bg-green-500'
+										/>
+										<input
+											type='radio'
+											name='rating-4'
+											className='mask mask-star-2 bg-green-500'
+											checked
+										/>
+										<input
+											type='radio'
+											name='rating-4'
+											className='mask mask-star-2 bg-green-500'
+										/>
+										<input
+											type='radio'
+											name='rating-4'
+											className='mask mask-star-2 bg-green-500'
+										/>
+										<input
+											type='radio'
+											name='rating-4'
+											className='mask mask-star-2 bg-green-500'
+										/>
 									</div>
-									
 								</div>
 							</div>
 						))}

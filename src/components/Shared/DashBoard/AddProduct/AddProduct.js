@@ -6,14 +6,14 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
-	const {user, loader} = useContext(AuthContext)
+	const { user, loader } = useContext(AuthContext);
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const time = String(new Date()).slice(0, 21);
+	const time = String(new Date()).slice(8, 21);
 
 	const navigate = useNavigate();
 	//! from .env.local file====>
@@ -38,7 +38,7 @@ const AddProduct = () => {
 
 					const addedProduct = {
 						author: user.displayName,
-						authorEmail: user.email,
+						email: user.email,
 						title: data.title,
 						location: data.location,
 						category: data.category,
@@ -52,9 +52,8 @@ const AddProduct = () => {
 					};
 					// console.log(addedProduct);
 
-
 					//! Save addedProducts info to the database....
-					fetch('http://localhost:5000/products', {
+					fetch('https://assignment-twelve-server.vercel.app/products', {
 						method: 'POST',
 						headers: {
 							'content-type': 'application/json',
@@ -66,11 +65,10 @@ const AddProduct = () => {
 							// console.log(result);
 							navigate('/dashboard/myProduct');
 							toast.success('Successfully created a new Product!!');
-						});					
+						});
 				}
 			});
 	};
-
 
 	return (
 		<div className='bg-base-200'>
@@ -99,7 +97,9 @@ const AddProduct = () => {
 										<p className='text-red-500'>{errors.title?.message}</p>
 									)}
 								</div>
-								<div className='form-control  w-full max-w-xs'>{user?.displayName}</div>
+								<div className='form-control  w-full max-w-xs'>
+									{user?.displayName}
+								</div>
 							</div>
 							<div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
 								<div className='form-control w-full max-w-xs'>
@@ -139,7 +139,7 @@ const AddProduct = () => {
 							<div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
 								<div className='form-control w-full max-w-xs'>
 									<label className='label'>
-										<span className='label-text'>Resale Price</span>
+										<span className='label-text'>Resale Price : $</span>
 									</label>
 									<input
 										type='number'
@@ -154,7 +154,7 @@ const AddProduct = () => {
 								</div>
 								<div className='form-control w-full max-w-xs'>
 									<label className='label'>
-										<span className='label-text'>Original Price</span>
+										<span className='label-text'>Original Price : $</span>
 									</label>
 									<input
 										type='number'

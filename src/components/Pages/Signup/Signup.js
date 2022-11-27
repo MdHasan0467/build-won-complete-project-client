@@ -24,7 +24,7 @@ const Signup = () => {
 		const password = form.password.value;
 		const photoURL = form.profile.value;
 		const role = form.role.value;
-		console.log(name, photoURL, email, password, role);
+		// console.log(name, photoURL, email, password, role);
 
 		//! Regex for password validation...
 		if (password.length < 6) {
@@ -45,11 +45,11 @@ const Signup = () => {
 		createSignUp(email, password)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
+				// console.log(user);
 				setSuccess(true);
 				form.reset();
 				updateUserDetails(name, photoURL);
-				saveUsers(name, email, role)
+				saveUsers(name, email, role);
 			})
 
 			.catch((error) => {
@@ -60,7 +60,7 @@ const Signup = () => {
 	const updateUserDetails = (name, photoURL) => {
 		userprofile(name, photoURL)
 			.then(() => {
-				alert('Profile Updated');
+				// alert('Profile Updated');
 			})
 			.catch((error) => {
 				console.error(error);
@@ -69,7 +69,7 @@ const Signup = () => {
 
 	const saveUsers = (name, email, role) => {
 		const user = { name, email, role };
-		fetch('http://localhost:5000/users', {
+		fetch('https://assignment-twelve-server.vercel.app/users', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
@@ -78,8 +78,8 @@ const Signup = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
-				navigate('/')
+				// console.log(data);
+				navigate('/login');
 				// setCreatedUserEmail(email);
 			});
 	};
@@ -231,7 +231,7 @@ export default Signup;
 // 	};
 // 		const saveUsers = (name, email, role) => {
 // 			const user = { name, email, role };
-// 			fetch('http://localhost:5000/users', {
+// 			fetch('https://assignment-twelve-server.vercel.app/users', {
 // 				method: 'POST',
 // 				headers: {
 // 					'content-type': 'application/json',

@@ -40,7 +40,7 @@ const Login = () => {
 				const user = result.user;
 				console.log(user);
 
-				// fetch('http://localhost:5000/users')
+				// fetch('https://assignment-twelve-server.vercel.app/users')
 				// 	.then(usersData => {
 				// 	console.log(usersData)
 				// }).catch(err => console.log(err))
@@ -61,7 +61,7 @@ const Login = () => {
 				const user = result.user;
 				console.log(user);
 
-				fetch('http://localhost:5000/users', {
+				fetch('https://assignment-twelve-server.vercel.app/users', {
 					method: 'POST',
 					headers: {
 						'content-type': 'application/json',
@@ -75,7 +75,6 @@ const Login = () => {
 						// setCreatedUserEmail(email);
 					});
 
-
 				navigate(from, { replace: true });
 				toast.success('Successfully Login!');
 			})
@@ -83,7 +82,6 @@ const Login = () => {
 	};
 	//!......................................
 
-	
 	return (
 		<div className='h-[800px] flex justify-center items-center'>
 			<Toaster></Toaster>

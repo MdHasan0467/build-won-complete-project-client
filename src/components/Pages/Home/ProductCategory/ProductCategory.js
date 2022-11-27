@@ -8,7 +8,9 @@ const ProductCategory = () => {
 		queryKey: ['rolls'],
 		queryFn: async () => {
 			try {
-				const res = await fetch('http://localhost:5000/rolls');
+				const res = await fetch(
+					'https://assignment-twelve-server.vercel.app/rolls'
+				);
 				const data = await res.json();
 				return data;
 			} catch (err) {
@@ -23,7 +25,9 @@ const ProductCategory = () => {
 		queryKey: ['tesla'],
 		queryFn: async () => {
 			try {
-				const res = await fetch('http://localhost:5000/tesla');
+				const res = await fetch(
+					'https://assignment-twelve-server.vercel.app/tesla'
+				);
 				const data = await res.json();
 				return data;
 			} catch (err) {
@@ -38,7 +42,9 @@ const ProductCategory = () => {
 		queryKey: ['mercedes'],
 		queryFn: async () => {
 			try {
-				const res = await fetch('http://localhost:5000/mercedes');
+				const res = await fetch(
+					'https://assignment-twelve-server.vercel.app/mercedes'
+				);
 				const data = await res.json();
 				return data;
 			} catch (err) {
@@ -58,9 +64,7 @@ const ProductCategory = () => {
 						<img className='w-full h-[200px]' src={rolls?.image} alt='Shoes' />
 					</figure>
 					<div className='card-body'>
-						<h2 className='card-title'>
-							Brand : {rolls?.category}
-						</h2>
+						<h2 className='card-title'>Brand : {rolls?.category}</h2>
 						<p className='text-start'>Model : {rolls?.title}</p>
 						<p className='text-start'>Exposure time : {rolls?.time}</p>
 						<p className='text-start'>Resale Price : $ {rolls?.resalePrice}</p>
@@ -76,9 +80,7 @@ const ProductCategory = () => {
 						<img className='w-full h-[200px]' src={tesla?.image} alt='Shoes' />
 					</figure>
 					<div className='card-body'>
-						<h2 className='card-title'>
-							Brand : {tesla?.category}
-						</h2>
+						<h2 className='card-title'>Brand : {tesla?.category}</h2>
 						<p className='text-start'>Model : {tesla?.title}</p>
 						<p className='text-start'>Exposure time : {tesla?.time}</p>
 						<p className='text-start'>Resale Price : ${tesla?.resalePrice}</p>
@@ -99,9 +101,7 @@ const ProductCategory = () => {
 						/>
 					</figure>
 					<div className='card-body'>
-						<h2 className='card-title'>
-							Brand : {mercedes?.category}
-						</h2>
+						<h2 className='card-title'>Brand : {mercedes?.category}</h2>
 						<p className='text-start'>Model : {mercedes?.title}</p>
 						<p className='text-start'>Exposure time : {mercedes?.time}</p>
 						<p className='text-start'>

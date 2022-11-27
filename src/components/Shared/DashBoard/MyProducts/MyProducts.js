@@ -1,23 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
-import { BsStopwatch } from 'react-icons/bs';
 import { AuthContext } from '../../../Context/AuthProvider';
+import { BsStopwatch } from 'react-icons/bs';
 
 const MyProducts = () => {
-	const {user} = useContext(AuthContext)
+	const { user } = useContext(AuthContext);
 	//! fetch for getting products data from mongodb.....
+
+	const url = `http://localhost:5000/products?email=${user?.email}`;
+
 	const { data: products } = useQuery({
-		queryKey: ['products'],
+		queryKey: ['products', user?.email],
 		queryFn: async () => {
-			try {
-				const res = await fetch(`http://localhost:5000/products/${user?.email}`);
-				const data = await res.json();
-				return data;
-			} catch (err) {
-				console.error(err);
-			}
-		},
+			const res = await fetch(url);
+			const data = await res.json();
+			return data
+		}
 	});
+
+	console.log(products);
+
 
 	const handleAdvertise = (id) => {
 		fetch(`http://localhost:5000/productById/${id}`)
@@ -39,8 +41,7 @@ const MyProducts = () => {
 				}
 			});
 	};
-
-	console.log(products);
+	
 	return (
 		<div className='mx-12'>
 			<h1>My Products{products?.length}</h1>
@@ -99,10 +100,10 @@ const MyProducts = () => {
 								{product.description}
 							</p>
 							<p className='text-start'>
-								<span className='text-bold text-gray-800 text-2xl text-green-600'>
-									<BsStopwatch></BsStopwatch>
+								<span className='text-bold text-gray-800 text-xl '>
+									Post Time :
 								</span>
-								{product.time}
+								<span className='text-blue-600'> {product.time}</span>
 							</p>
 							{product.author && (
 								<p className='text-start'>

@@ -7,13 +7,15 @@ import BookModal from '../../Shared/BookModal/BookModal';
 
 const TeslaGroup = () => {
 	const { logUser, loading, user } = useContext(AuthContext);
-	const [selected, setSelected] = useState(null)
+	const [selected, setSelected] = useState(null);
 	//! fetch for getting teslaDatas data from mongodb.....
 	const { data: teslaDatas } = useQuery({
 		queryKey: ['teslaDatas'],
 		queryFn: async () => {
 			try {
-				const res = await fetch('http://localhost:5000/teslaDatas');
+				const res = await fetch(
+					'https://assignment-twelve-server.vercel.app/teslaDatas'
+				);
 				const data = await res.json();
 				return data;
 			} catch (err) {
@@ -21,7 +23,7 @@ const TeslaGroup = () => {
 			}
 		},
 	});
-	// console.log(teslaDatas);
+
 	if (loading) {
 		return <Loader></Loader>;
 	}

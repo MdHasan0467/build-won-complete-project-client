@@ -7,13 +7,15 @@ import BookModal from '../../Shared/BookModal/BookModal';
 
 const MercedesGroup = () => {
 	const { logUser, loading } = useContext(AuthContext);
-	const [selected, setSelected] = useState(null)
+	const [selected, setSelected] = useState(null);
 	//! fetch for getting mercedesDatas data from mongodb.....
-	const { data: mercedesDatas =[] } = useQuery({
+	const { data: mercedesDatas = [] } = useQuery({
 		queryKey: ['mercedesDatas'],
 		queryFn: async () => {
 			try {
-				const res = await fetch('http://localhost:5000/mercedesDatas');
+				const res = await fetch(
+					'https://assignment-twelve-server.vercel.app/mercedesDatas'
+				);
 				const data = await res.json();
 				return data;
 			} catch (err) {
@@ -22,8 +24,6 @@ const MercedesGroup = () => {
 		},
 	});
 
-	
-	// console.log(mercedesDatas);
 	if (loading) {
 		return <Loader></Loader>;
 	}

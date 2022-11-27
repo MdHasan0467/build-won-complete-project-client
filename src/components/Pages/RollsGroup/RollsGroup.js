@@ -6,14 +6,16 @@ import { Checkmark } from 'react-checkmark';
 import BookModal from '../../Shared/BookModal/BookModal';
 
 const RollsGroup = () => {
-	const [selected, setSelected] = useState(null)
+	const [selected, setSelected] = useState(null);
 	const { logUser, loading, user } = useContext(AuthContext);
 	//! fetch for getting rollsDatas data from mongodb.....
 	const { data: rollsDatas } = useQuery({
 		queryKey: ['rollsDatas'],
 		queryFn: async () => {
 			try {
-				const res = await fetch('http://localhost:5000/rollsDatas');
+				const res = await fetch(
+					'https://assignment-twelve-server.vercel.app/rollsDatas'
+				);
 				const data = await res.json();
 				return data;
 			} catch (err) {
@@ -22,7 +24,7 @@ const RollsGroup = () => {
 		},
 	});
 
-	console.log(rollsDatas);
+	
 
 	if (loading) {
 		return <Loader></Loader>;
@@ -135,4 +137,3 @@ const RollsGroup = () => {
 };
 
 export default RollsGroup;
-

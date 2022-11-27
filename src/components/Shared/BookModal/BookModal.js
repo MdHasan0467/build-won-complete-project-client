@@ -20,7 +20,7 @@ const BookModal = ({ selected, setSelected }) => {
 		const buyerNumber = e.target.buyerNumber.value;
 
 		const bookingData = {
-            productImg,
+			productImg,
 			sellerName,
 			sellerEmail,
 			productCategory,
@@ -30,9 +30,9 @@ const BookModal = ({ selected, setSelected }) => {
 			meetingDate,
 			buyerNumber,
 		};
-		console.log(bookingData);
+		
 
-		fetch('http://localhost:5000/bookingData', {
+		fetch('https://assignment-twelve-server.vercel.app/bookingData', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
@@ -41,8 +41,8 @@ const BookModal = ({ selected, setSelected }) => {
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				// console.log(result);
-				toast.success('Successfully created a new Product!!');
+				
+				toast.success('Successfully added a new Product!!');
 			});
 	};
 	return (
@@ -131,15 +131,13 @@ const BookModal = ({ selected, setSelected }) => {
 							/>
 						</div>
 
-						
-							<button
-								type='submit'
-								htmlFor='booking-modal'
-								className='btn border-0 hover:bg-green-400 mt-3 text-white'
-							>
-								Confirm
-							</button>
-						
+						<button
+							type='submit'
+							htmlFor='booking-modal'
+							className='btn border-0 hover:bg-green-400 mt-3 text-white'
+						>
+							Confirm
+						</button>
 					</form>
 				</div>
 			</div>

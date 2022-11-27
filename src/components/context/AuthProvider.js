@@ -1,41 +1,36 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {  createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signInWithPopup,  GoogleAuthProvider,  onAuthStateChanged, signOut, getAuth } from 'firebase/auth';
+import {
+	createUserWithEmailAndPassword,
+	updateProfile,
+	signInWithEmailAndPassword,
+	signInWithPopup,
+	GoogleAuthProvider,
+	onAuthStateChanged,
+	signOut,
+	getAuth,
+} from 'firebase/auth';
 import app from '../firebase/firebase.init';
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
-		const [logUser, setLogUser] = useState();
+	const [logUser, setLogUser] = useState();
 
 	const googleProvider = new GoogleAuthProvider();
 	//!<===================================>
 	//!<===================================>
 
-
-			useEffect(() => {
-			
-				fetch(`http://localhost:5000/users/${user?.email}`)
-					.then((res) => res.json())
-					.then((result) => {
-						// console.log(result[0]);
-						setLogUser(result[0]);
-					});
-			}, [user?.email]);
-
-			
-			
-
-
-
-
-
-
-
-
-
+	useEffect(() => {
+		fetch(`https://assignment-twelve-server.vercel.app/users/${user?.email}`)
+			.then((res) => res.json())
+			.then((result) => {
+				// console.log(result[0]);
+				setLogUser(result[0]);
+			});
+	}, [user?.email]);
 
 	//! Create User....
 	const createSignUp = (email, password) => {
@@ -49,7 +44,6 @@ const AuthProvider = ({ children }) => {
 		return updateProfile(auth.currentUser, {
 			displayName: name,
 			photoURL: photoURL,
-			
 		});
 	};
 	//!......................................
