@@ -6,7 +6,7 @@ import { Checkmark } from 'react-checkmark';
 import BookModal from '../../Shared/BookModal/BookModal';
 
 const MercedesGroup = () => {
-	const { loading, } = useContext(AuthContext);
+	const { logUser, loading } = useContext(AuthContext);
 	const [selected, setSelected] = useState(null)
 	//! fetch for getting mercedesDatas data from mongodb.....
 	const { data: mercedesDatas =[] } = useQuery({
@@ -46,9 +46,7 @@ const MercedesGroup = () => {
 							/>
 						</figure>
 						<div className='card-body'>
-							<h2 className='card-title'>
-								Brand Name: {mercedesData?.title}
-							</h2>
+							<h2 className='card-title'>Brand Name: {mercedesData?.title}</h2>
 							<p className='text-start'>Exposure time : {mercedesData?.time}</p>
 
 							<p className='text-start'>
@@ -105,18 +103,31 @@ const MercedesGroup = () => {
 									</span>
 								</p>
 							)}
-							<div className='card-actions justify-end'>
-								<button>
-									<label
-										onClick={() => setSelected(mercedesData)}
-										htmlFor='booking-modal'
-										className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
-									>
-										Book Now
-									</label>
-								</button>
-							</div>
+							{logUser?.role === 'Buyer' && (
+								<div className='card-actions justify-end'>
+									<button>
+										<label
+											onClick={() => setSelected(mercedesData)}
+											htmlFor='booking-modal'
+											className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
+										>
+											Book Now
+										</label>
+									</button>
+								</div>
+							)}
+							{logUser?.role === 'Seller' && (
+								<p className='text-emerald-600 font-serif font-bold my-2'>
+									Only buyer can book this product
+								</p>
+							)}
+							{logUser?.role === 'admin' && (
+								<p className='text-emerald-600 font-serif font-bold my-2'>
+									Only buyer can book this product
+								</p>
+							)}
 						</div>
+
 						<BookModal
 							selected={selected}
 							setSelected={setSelected}

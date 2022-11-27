@@ -6,7 +6,7 @@ import { Checkmark } from 'react-checkmark';
 import BookModal from '../../Shared/BookModal/BookModal';
 
 const TeslaGroup = () => {
-	const { loading, user } = useContext(AuthContext);
+	const { logUser, loading, user } = useContext(AuthContext);
 	const [selected, setSelected] = useState(null)
 	//! fetch for getting teslaDatas data from mongodb.....
 	const { data: teslaDatas } = useQuery({
@@ -44,9 +44,7 @@ const TeslaGroup = () => {
 							/>
 						</figure>
 						<div className='card-body'>
-							<h2 className='card-title'>
-								Brand Name: {teslaData?.title}
-							</h2>
+							<h2 className='card-title'>Brand Name: {teslaData?.title}</h2>
 							<p className='text-start'>Exposure time : {teslaData?.time}</p>
 
 							<p className='text-start'>
@@ -102,14 +100,29 @@ const TeslaGroup = () => {
 									</span>
 								</p>
 							)}
-							<div className='card-actions justify-end'>
-								<label onClick={() => setSelected(teslaData)}
-									htmlFor='booking-modal'
-									className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
-								>
-									Book Now
-								</label>
-							</div>
+							{logUser?.role === 'Buyer' && (
+								<div className='card-actions justify-end'>
+									<button>
+										<label
+											onClick={() => setSelected(teslaData)}
+											htmlFor='booking-modal'
+											className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
+										>
+											Book Now
+										</label>
+									</button>
+								</div>
+							)}
+							{logUser?.role === 'Seller' && (
+								<p className='text-emerald-600 font-serif font-bold my-2'>
+									Only buyer can book this product
+								</p>
+							)}
+							{logUser?.role === 'admin' && (
+								<p className='text-emerald-600 font-serif font-bold my-2'>
+									Only buyer can book this product
+								</p>
+							)}
 						</div>
 						<BookModal selected={selected}></BookModal>
 					</div>

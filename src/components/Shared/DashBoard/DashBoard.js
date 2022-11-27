@@ -23,7 +23,6 @@ const DashBoard = () => {
 		// });
 	
 		useEffect(() => {
-			console.log(user?.email);
 			fetch(`http://localhost:5000/users/${user?.email}`)
 				.then((res) => res.json())
 				.then((result) => {
@@ -31,7 +30,7 @@ const DashBoard = () => {
 				});
 		}, [user?.email]);
 
-	console.log(logUser?.role)
+	
 		if (loading) {
 		return <Loader></Loader>;
 	}

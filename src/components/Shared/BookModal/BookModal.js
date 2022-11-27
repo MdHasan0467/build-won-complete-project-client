@@ -1,54 +1,145 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
+import toast from 'react-hot-toast';
 
 const BookModal = ({ selected, setSelected }) => {
-    
-	const {  user } = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 
+	const handleModalValue = (e) => {
+		e.preventDefault();
+		console.log(e.target.value);
 
-    const handleModalValue = e => {
-        e.defaultPrevent()
-        const data = {
-					sellerName : e.target.value.sellerName,
-        };
-        console.log(data);
-    }
+		const productImg = selected.image;
+		const sellerName = e.target.sellerName.value;
+		const sellerEmail = e.target.sellerEmail.value;
+		const productCategory = e.target.productCategory.value;
+		const productModel = e.target.productModel.value;
+		const resellPrice = e.target.resellPrice.value;
+		const sellerLocation = e.target.sellerLocation.value;
+		const meetingDate = e.target.meetingDate.value;
+		const buyerNumber = e.target.buyerNumber.value;
+
+		const bookingData = {
+            productImg,
+			sellerName,
+			sellerEmail,
+			productCategory,
+			productModel,
+			resellPrice,
+			sellerLocation,
+			meetingDate,
+			buyerNumber,
+		};
+		console.log(bookingData);
+
+		fetch('http://localhost:5000/bookingData', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(bookingData),
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				// console.log(result);
+				toast.success('Successfully created a new Product!!');
+			});
+	};
 	return (
 		<div className='modal_body'>
 			<input type='checkbox' id='booking-modal' className='modal-toggle' />
 			<div className='modal'>
 				<div className='modal-box relative'>
-                    <form onSubmit={handleModalValue} className='modal_card'>
-                        <input type="text" name='sellerName' readOnly defaultValue={user?.displayName} className="input text-center input-bordered w-full " />
+					<label
+						htmlFor='booking-modal'
+						className='btn border-0 hover:bg-red-600 text-white btn-sm btn-circle absolute right-2 top-2'
+					>
+						✕
+					</label>
+					<form onSubmit={handleModalValue} className='modal_card my-5'>
+						<input
+							type='text'
+							name='sellerName'
+							readOnly
+							defaultValue={user?.displayName}
+							className='input text-center input-bordered w-full '
+						/>
 
-                        <input type="text" readOnly defaultValue={user?.email} className="input input-bordered text-center  my-3 w-full " />
-                        <div className='my-3'>
-                            
-                         <h1 className='text-start'>Brand :</h1>
-                        <input type="text" readOnly defaultValue={selected?.category} className="input input-bordered w-full " />
-                        </div>
-                        <div className='my-3'>
-                         <h1 className='text-start'>Product Model :</h1>
-                        <input type="text" readOnly defaultValue={selected?.title} className="input input-bordered w-full " />
-                        </div>
-                        <div className='my-3'>
-                         <h1 className='text-start'>Resell Price :</h1>
-                        <input type="text" readOnly defaultValue={selected?.resalePrice} className="input input-bordered w-full " />
-                        </div>
-                        <div className='my-3'>
-                         <h1 className='text-start'>Seller Location :</h1>
-                        <input type="text" readOnly defaultValue={selected?.location} className="input input-bordered w-full " />
-                        </div>
-					
-                        <div className='btn-group mt-8 mb-3'>
-                            <button type='submit' htmlFor='booking-modal' className='btn border-0 hover:bg-green-400 text-white'>
-                                Confirm
-                            </button>
-                            <div className='bg-white w-[2px] h-full'></div>
-                            <button htmlFor='booking-modal' className='btn border-0 hover:bg-red-600 text-white'>
-                                Cancel
-                            </button>
-                        </div>
+						<input
+							type='text'
+							name='sellerEmail'
+							readOnly
+							defaultValue={user?.email}
+							className='input input-bordered text-center  my-3 w-full '
+						/>
+						<div className='my-3'>
+							<h1 className='text-start'>Brand :</h1>
+							<input
+								type='text'
+								name='productCategory'
+								readOnly
+								defaultValue={selected?.category}
+								className='input input-bordered w-full '
+							/>
+						</div>
+						<div className='my-3'>
+							<h1 className='text-start'>Product Model :</h1>
+							<input
+								type='text'
+								name='productModel'
+								readOnly
+								defaultValue={selected?.title}
+								className='input input-bordered w-full '
+							/>
+						</div>
+						<div className='my-3'>
+							<h1 className='text-start'>Resell Price :</h1>
+							<input
+								type='text'
+								name='resellPrice'
+								readOnly
+								defaultValue={selected?.resalePrice}
+								className='input input-bordered w-full '
+							/>
+						</div>
+						<div className='my-3'>
+							<h1 className='text-start'>Seller Location :</h1>
+							<input
+								type='text'
+								name='sellerLocation'
+								readOnly
+								defaultValue={selected?.location}
+								className='input input-bordered w-full '
+							/>
+						</div>
+						<div className='my-3'>
+							<h1 className='text-start'>Meeting Date :</h1>
+							<input
+								type='text'
+								name='meetingDate'
+								placeholder='Give here Your Meeting date'
+								className='input input-bordered w-full '
+							/>
+						</div>
+						<div className='my-3'>
+							<h1 className='text-start'>Buyer Number :</h1>
+							<input
+								type='text'
+								name='buyerNumber'
+								placeholder='Give here Your Phone Number'
+								className='input input-bordered w-full '
+							/>
+						</div>
+
+						
+							<button
+								type='submit'
+								htmlFor='booking-modal'
+								className='btn border-0 hover:bg-green-400 mt-3 text-white'
+							>
+								Confirm
+							</button>
+						
 					</form>
 				</div>
 			</div>
@@ -57,6 +148,3 @@ const BookModal = ({ selected, setSelected }) => {
 };
 
 export default BookModal;
-
-
-

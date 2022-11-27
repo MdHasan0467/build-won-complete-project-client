@@ -51,7 +51,12 @@ const CustomNavbar = ({ users }) => {
 									<span className='block text-sm font-bold'>
 										{user?.displayName}
 									</span>
-									<span>{logUser?.role === 'admin' && <BsFillBookmarkStarFill className='text-green-600 mt-1 ml-2'></BsFillBookmarkStarFill>}</span>
+									<span>
+										{logUser?.role === 'admin' && (
+											<BsFillBookmarkStarFill className='text-green-600 mt-1 ml-2'></BsFillBookmarkStarFill>
+										)}
+									</span>
+									<p className='mx-2'>({logUser?.role})</p>
 								</div>
 								<span className='block truncate text-sm font-medium '>
 									{user?.email}
