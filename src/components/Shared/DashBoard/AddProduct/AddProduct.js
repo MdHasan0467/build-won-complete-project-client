@@ -70,7 +70,7 @@ const AddProduct = () => {
 				}
 			});
 	};
-	
+
 	if (loading) {
 		return <Loader></Loader>;
 	}

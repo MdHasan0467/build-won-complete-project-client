@@ -27,11 +27,10 @@ const Home = () => {
 
 	console.log(logUser);
 
-
 	if (loading) {
 		return <Loader></Loader>;
 	}
-	console.log(user?.email)
+	console.log(user?.email);
 	return (
 		<div className='m-2'>
 			<CustomCarousel></CustomCarousel>

@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
 import { Checkmark } from 'react-checkmark';
 import BookModal from '../../Shared/BookModal/BookModal';
+import toast from 'react-hot-toast';
 
 const MercedesGroup = () => {
 	const { logUser, loading, user } = useContext(AuthContext);
@@ -24,8 +25,6 @@ const MercedesGroup = () => {
 			}
 		},
 	});
-
-
 
 	const handleWishList = (id) => {
 		// alert(id)
@@ -53,7 +52,7 @@ const MercedesGroup = () => {
 				};
 
 				if (data) {
-					fetch('http://localhost:5000/wishLists', {
+					fetch('https://assignment-twelve-server.vercel.app/wishLists', {
 						method: 'POST',
 						headers: {
 							'content-type': 'application/json',
@@ -62,18 +61,19 @@ const MercedesGroup = () => {
 					})
 						.then((res) => res.json())
 						.then((ad) => {
-							console.log(ad);
+							// console.log(ad);
+							toast.success(
+								'You are successfully added your new wishing product'
+							);
 						});
 				}
 			});
 	};
 
-
-
 	if (loading) {
 		return <Loader></Loader>;
 	}
-	console.log(logUser)
+	console.log(logUser);
 	return (
 		<div>
 			<img

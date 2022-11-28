@@ -107,19 +107,11 @@ const Route = () => {
 					},
 					{
 						path: '/dashboard/allSeller',
-						element: (
-							<AdminRoutes>
-								<AllSeller></AllSeller>
-							</AdminRoutes>
-						),
+						element: <AllSeller></AllSeller>,
 					},
 					{
 						path: '/dashboard/allBuyers',
-						element: (
-							<AdminRoutes>
-								<AllBuyers></AllBuyers>
-							</AdminRoutes>
-						),
+						element: <AllBuyers></AllBuyers>,
 					},
 				],
 			},

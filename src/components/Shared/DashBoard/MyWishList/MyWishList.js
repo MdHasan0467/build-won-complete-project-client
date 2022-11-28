@@ -7,7 +7,7 @@ const MyWishList = () => {
 	const { user, loading } = useContext(AuthContext);
 	//! fetch for getting products data from mongodb.....
 
-	const url = `http://localhost:5000/mywish?email=${user?.email}`;
+	const url = `https://assignment-twelve-server.vercel.app/mywish?email=${user?.email}`;
 
 	const { data: products } = useQuery({
 		queryKey: ['products', user?.email],
@@ -21,7 +21,7 @@ const MyWishList = () => {
 	console.log(products);
 
 	if (loading) {
-		return <Loader></Loader>
+		return <Loader></Loader>;
 	}
 	return (
 		<div className='mx-12'>

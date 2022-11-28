@@ -30,7 +30,6 @@ const BookModal = ({ selected, setSelected }) => {
 			meetingDate,
 			buyerNumber,
 		};
-		
 
 		fetch('https://assignment-twelve-server.vercel.app/bookingData', {
 			method: 'POST',
@@ -41,7 +40,6 @@ const BookModal = ({ selected, setSelected }) => {
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				
 				toast.success('Successfully added a new Product!!');
 			});
 	};

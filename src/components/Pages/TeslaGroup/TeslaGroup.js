@@ -4,11 +4,12 @@ import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
 import { Checkmark } from 'react-checkmark';
 import BookModal from '../../Shared/BookModal/BookModal';
+import toast from 'react-hot-toast';
 
 const TeslaGroup = () => {
 	const { logUser, loading, user } = useContext(AuthContext);
 	const [selected, setSelected] = useState(null);
-		const time = String(new Date()).slice(8, 21);
+	const time = String(new Date()).slice(8, 21);
 	//! fetch for getting teslaDatas data from mongodb.....
 	const { data: teslaDatas } = useQuery({
 		queryKey: ['teslaDatas'],
@@ -25,47 +26,49 @@ const TeslaGroup = () => {
 		},
 	});
 
+	const handleWishList = (id) => {
+		// alert(id)
+		fetch(`https://assignment-twelve-server.vercel.app/productById/${id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
 
-		const handleWishList = (id) => {
-			// alert(id)
-			fetch(`https://assignment-twelve-server.vercel.app/productById/${id}`)
-				.then((res) => res.json())
-				.then((data) => {
-					console.log(data);
+				const wishData = {
+					author: data.author,
+					authorEmail: data.email,
+					productImage: data.image,
+					authorLocation: data.location,
+					originalPrice: data.originalPrice,
+					resalePrice: data.resalePrice,
+					postedTime: data.time,
+					productTitle: data.title,
+					yearOfPurchase: data.yearOfPurchase,
+					yearsOfUse: data.yearsOfUse,
+					category: data.category,
+					description: data.description,
+					email: user.email,
+					wishTime: time,
+					wisher: logUser.role,
+				};
 
-					const wishData = {
-						author: data.author,
-						authorEmail: data.email,
-						productImage: data.image,
-						authorLocation: data.location,
-						originalPrice: data.originalPrice,
-						resalePrice: data.resalePrice,
-						postedTime: data.time,
-						productTitle: data.title,
-						yearOfPurchase: data.yearOfPurchase,
-						yearsOfUse: data.yearsOfUse,
-						category: data.category,
-						description: data.description,
-						email: user.email,
-						wishTime: time,
-						wisher: logUser.role,
-					};
-
-					if (data) {
-						fetch('http://localhost:5000/wishLists', {
-							method: 'POST',
-							headers: {
-								'content-type': 'application/json',
-							},
-							body: JSON.stringify(wishData),
-						})
-							.then((res) => res.json())
-							.then((ad) => {
-								console.log(ad);
-							});
-					}
-				});
-		};
+				if (data) {
+					fetch('https://assignment-twelve-server.vercel.app/wishLists', {
+						method: 'POST',
+						headers: {
+							'content-type': 'application/json',
+						},
+						body: JSON.stringify(wishData),
+					})
+						.then((res) => res.json())
+						.then((ad) => {
+							// console.log(ad);
+							toast.success(
+								'You are successfully added your new wishing product'
+							);
+						});
+				}
+			});
+	};
 
 	if (loading) {
 		return <Loader></Loader>;
