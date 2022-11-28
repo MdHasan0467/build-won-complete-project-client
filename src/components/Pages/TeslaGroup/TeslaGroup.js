@@ -8,6 +8,7 @@ import BookModal from '../../Shared/BookModal/BookModal';
 const TeslaGroup = () => {
 	const { logUser, loading, user } = useContext(AuthContext);
 	const [selected, setSelected] = useState(null);
+		const time = String(new Date()).slice(8, 21);
 	//! fetch for getting teslaDatas data from mongodb.....
 	const { data: teslaDatas } = useQuery({
 		queryKey: ['teslaDatas'],
@@ -23,6 +24,48 @@ const TeslaGroup = () => {
 			}
 		},
 	});
+
+
+		const handleWishList = (id) => {
+			// alert(id)
+			fetch(`https://assignment-twelve-server.vercel.app/productById/${id}`)
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+
+					const wishData = {
+						author: data.author,
+						authorEmail: data.email,
+						productImage: data.image,
+						authorLocation: data.location,
+						originalPrice: data.originalPrice,
+						resalePrice: data.resalePrice,
+						postedTime: data.time,
+						productTitle: data.title,
+						yearOfPurchase: data.yearOfPurchase,
+						yearsOfUse: data.yearsOfUse,
+						category: data.category,
+						description: data.description,
+						email: user.email,
+						wishTime: time,
+						wisher: logUser.role,
+					};
+
+					if (data) {
+						fetch('http://localhost:5000/wishLists', {
+							method: 'POST',
+							headers: {
+								'content-type': 'application/json',
+							},
+							body: JSON.stringify(wishData),
+						})
+							.then((res) => res.json())
+							.then((ad) => {
+								console.log(ad);
+							});
+					}
+				});
+		};
 
 	if (loading) {
 		return <Loader></Loader>;
@@ -115,6 +158,15 @@ const TeslaGroup = () => {
 											className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
 										>
 											Book Now
+										</label>
+									</button>
+									
+									<button>
+										<label
+											onClick={() => handleWishList(teslaData?._id)}
+											className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
+										>
+											Add To Wish List
 										</label>
 									</button>
 								</div>

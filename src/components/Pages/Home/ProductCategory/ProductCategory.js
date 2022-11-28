@@ -20,7 +20,7 @@ const ProductCategory = () => {
 	});
 	console.log(rolls);
 
-	// //! fetch for getting Rolls_Royce from mongodb.....
+	// //! fetch for getting Tesla from mongodb.....
 	const { data: tesla } = useQuery({
 		queryKey: ['tesla'],
 		queryFn: async () => {
@@ -37,7 +37,7 @@ const ProductCategory = () => {
 	});
 	console.log(tesla);
 
-	// //! fetch for getting Rolls_Royce from mongodb.....
+	// //! fetch for getting mercedes from mongodb.....
 	const { data: mercedes } = useQuery({
 		queryKey: ['mercedes'],
 		queryFn: async () => {

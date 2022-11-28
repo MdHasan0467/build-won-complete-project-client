@@ -18,7 +18,7 @@ const Error = () => {
 									<span className='sr-only'>Error</span>4
 								</div>
 								<img
-									className=' w-[150px] animate-bounce'
+									className=' w-[150px] animate-spin'
 									src='car-wheel.png'
 									alt=''
 								/>

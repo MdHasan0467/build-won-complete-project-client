@@ -29,7 +29,7 @@ const Advertisement = () => {
 						{categories?.map((category) => (
 							<div className='card w-96 glass'>
 								<figure>
-									<img src={category?.image} alt='car!' />
+									<img className='w-full h-72 animate-pulse' src={category?.image} alt='car!' />
 								</figure>
 								<div className='card-body'>
 									<h2 className='card-title'>{category?.title}</h2>
