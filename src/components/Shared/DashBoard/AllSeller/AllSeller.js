@@ -21,105 +21,56 @@ const AllSeller = () => {
 		console.log(usersrole);
     return (
 			<div>
-				<img
-					src='mercedes.banner.jpg'
-					alt='tesla banner'
-					className='w-[500px] hidden my-3 ml-[30%] lg:block h-[200px]'
-				/>
+				<h1>All sellers here</h1>
+				{usersrole &&
+					usersrole?.map((seller) => (
+						<div className='lg:overflow-x-auto lg:w-full w-[100vw]'>
+							<table className='table w-full'>
+								<thead>
+									<tr>
+										<th>User</th>
+										<th>Role</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div className='flex items-center space-x-3'>
+												<div className='avatar'>
+													<div className='mask mask-squircle w-12 h-12'>
+														<img
+															src={seller.photoURL}
+															alt='Avatar Tailwind CSS Component'
+														/>
+													</div>
+												</div>
+												<div>
+													<div className='font-bold'>{seller.name}</div>
+													<div className='text-sm opacity-50'>
+														{seller.email}
+													</div>
+												</div>
+											</div>
+										</td>
+										<td>
+											{seller.role}
+											<br />
+											<span className='badge badge-ghost badge-sm'>
+												**********
+											</span>
+										</td>
 
-				<div className='grid grid-cols-1 my-5 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-					{usersrole?.map((role) => (
-						<div className='card w-96 bg-base-100 shadow-xl'>
-							<figure>
-								<img
-									className='w-full h-[200px]'
-									src={role?.image}
-									alt='Shoes'
-								/>
-							</figure>
-							<div className='card-body'>
-								<h2 className='card-title'>
-									Brand Name: {role?.title}
-								</h2>
-								<p className='text-start'>
-									Exposure time : {role?.time}
-								</p>
-
-								<p className='text-start'>
-									<span className='text-bold text-gray-800 text-xl'>
-										Category :
-									</span>
-									{role.category}
-								</p>
-								<p className='text-start'>
-									<span className='text-bold text-gray-800 text-xl'>
-										Location :
-									</span>
-									{role.location}
-								</p>
-								<p className='text-start'>
-									<span className='text-bold text-gray-800 text-xl'>
-										Original Price :
-									</span>
-									{role.originalPrice}
-								</p>
-								<p className='text-start'>
-									<span className='text-bold text-gray-800 text-xl'>
-										Resale Price :
-									</span>
-									{role.resalePrice}
-								</p>
-								<p className='text-start'>
-									<span className='text-bold text-gray-800 text-xl'>
-										Years of use :
-									</span>
-									{role.yearsOfUse}
-								</p>
-								<p className='text-start'>
-									<span className='text-bold text-gray-800 text-xl'>
-										Year of Purchase :
-									</span>
-									{role.yearOfPurchase}
-								</p>
-								<p className='text-start'>
-									<span className='text-bold text-gray-800 text-xl'>
-										Description :
-									</span>
-									{role.description}
-								</p>
-
-								{role.author && (
-									<p className='text-start flex'>
-										<span className='text-bold text-gray-800 text-xl'>
-											Seller :
-										</span>
-										<span className='flex ml-2'>
-											{role.author}
-											
-										</span>
-									</p>
-								)}
-								{logUser?.role === 'Buyer' && (
-									<div className='card-actions justify-end'>
-										<button>
-											Verify
-										</button>
-									</div>
-								)}
-								{logUser?.role === 'Seller' && (
-									<p className='text-emerald-600 font-serif font-bold my-2'>
-										Only buyer can book this product
-									</p>
-								)}
-								{logUser?.role === 'admin' && (
-									<p className='text-emerald-600 font-serif font-bold my-2'>
-										Only buyer can book this product
-									</p>
-								)}
-							</div>
+										<th>
+											<button className='btn btn-ghost btn-xs'>details</button>
+										</th>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					))}
-				</div>
+
+				{!usersrole && <p>No seller here</p>}
 			</div>
 		);
 };

@@ -4,7 +4,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
 
 const Signup = () => {
-	const { loading } = useContext(AuthContext);
+	const { user,loading } = useContext(AuthContext);
 	const [success, setSuccess] = useState(false);
 	const [passwordError, setPasswordError] = useState('');
 	// const [createdUserEmail, setCreatedUserEmail] = useState('');
@@ -87,6 +87,7 @@ const Signup = () => {
 	if (loading) {
 		return <Loader></Loader>;
 	}
+	console.log(user);
 	return (
 		<div>
 			<div>

@@ -12,20 +12,8 @@ const Home = () => {
 	const { user, loading } = useContext(AuthContext);
 	const [product, setProduct] = useState(null);
 	const [logUser, setLogUser] = useState(null);
-	// console.log(products)
+
 	// //! fetch for getting users data from mongodb.....
-	// const { data: users } = useQuery({
-	// 	queryKey: ['users'],
-	// 	queryFn: async () => {
-	// 		try {
-	// 			const res = await fetch(`https://assignment-twelve-server.vercel.app/users/${user?.email}`);
-	// 			const data = await res.json();
-	// 			return data;
-	// 		} catch (err) {
-	// 			console.error(err);
-	// 		}
-	// 	},
-	// });
 
 	useEffect(() => {
 		console.log(user?.email);
@@ -39,10 +27,11 @@ const Home = () => {
 
 	console.log(logUser);
 
-	// console.log('all users from mongo',users);
+
 	if (loading) {
 		return <Loader></Loader>;
 	}
+	console.log(user?.email)
 	return (
 		<div className='m-2'>
 			<CustomCarousel></CustomCarousel>

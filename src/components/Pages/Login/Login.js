@@ -38,7 +38,7 @@ const Login = () => {
 		logIn(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
+				console.log('user login by email', user);
 
 				// fetch('https://assignment-twelve-server.vercel.app/users')
 				// 	.then(usersData => {
@@ -72,7 +72,6 @@ const Login = () => {
 					.then((data) => {
 						console.log(data);
 						navigate('/');
-						// setCreatedUserEmail(email);
 					});
 
 				navigate(from, { replace: true });
@@ -81,6 +80,9 @@ const Login = () => {
 			.catch((error) => console.error(error));
 	};
 	//!......................................
+
+
+		
 
 	return (
 		<div className='h-[800px] flex justify-center items-center'>

@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../Context/AuthProvider';
+import Loader from '../../../Loader/Loader';
 
 const AllBuyers = () => {
+	const {loading} = useContext(AuthContext)
 	//! fetch for getting products data from mongodb.....
 
 	const url = 'http://localhost:5000/usersroleBuyers';
@@ -15,41 +18,61 @@ const AllBuyers = () => {
 		},
 	});
 
+	if (loading) {
+		return <Loader></Loader>
+	}
+
 	console.log(usersroleBuyers);
 	return (
-		<div className='overflow-x-auto'>
-			<table className='table w-full'>
-				<thead>
-					<tr>
-						<th></th>
-						<th>Name</th>
-						<th>Job</th>
-						<th>Favorite Color</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>1</th>
-						<td>Cy Ganderton</td>
-						<td>Quality Control Specialist</td>
-						<td>Blue</td>
-					</tr>
+		<div>
+			<h1>All Buyers here</h1>
+			{usersroleBuyers &&
+				usersroleBuyers?.map((buyer) => (
+					<div className='lg:overflow-x-auto lg:w-full w-[100vw]'>
+						<table className='table w-full'>
+							<thead>
+								<tr>
+									<th>User</th>
+									<th>Role</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div className='flex items-center space-x-3'>
+											<div className='avatar'>
+												<div className='mask mask-squircle w-12 h-12'>
+													<img
+														src={buyer.photoURL}
+														alt='Avatar Tailwind CSS Component'
+													/>
+												</div>
+											</div>
+											<div>
+												<div className='font-bold'>{buyer.name}</div>
+												<div className='text-sm opacity-50'>{buyer.email}</div>
+											</div>
+										</div>
+									</td>
+									<td>
+										{buyer.role}
+										<br />
+										<span className='badge badge-ghost badge-sm'>
+											**********
+										</span>
+									</td>
 
-					<tr className='hover'>
-						<th>2</th>
-						<td>Hart Hagerty</td>
-						<td>Desktop Support Technician</td>
-						<td>Purple</td>
-					</tr>
+									<th>
+										<button className='btn btn-ghost btn-xs'>details</button>
+									</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				))}
 
-					<tr>
-						<th>3</th>
-						<td>Brice Swyre</td>
-						<td>Tax Accountant</td>
-						<td>Red</td>
-					</tr>
-				</tbody>
-			</table>
+			{!usersroleBuyers && <p>No Buyer here</p>}
 		</div>
 	);
 };
