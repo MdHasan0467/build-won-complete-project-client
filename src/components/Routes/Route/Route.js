@@ -9,11 +9,13 @@ import MercedesGroup from '../../Pages/MercedesGroup/MercedesGroup';
 import RollsGroup from '../../Pages/RollsGroup/RollsGroup';
 import Signup from '../../Pages/Signup/Signup';
 import TeslaGroup from '../../Pages/TeslaGroup/TeslaGroup';
+import AdminRoutes from '../../PrivateRoute/AdminRoutes/AdminRoutes';
 import PrivateRoute from '../../PrivateRoute/PrivateRoute';
 import AddProduct from '../../Shared/DashBoard/AddProduct/AddProduct';
 import AllBuyers from '../../Shared/DashBoard/AllBuyers/AllBuyers';
 import AllSeller from '../../Shared/DashBoard/AllSeller/AllSeller';
 import DashBoard from '../../Shared/DashBoard/DashBoard';
+import MyBuyers from '../../Shared/DashBoard/MyBuyers/MyBuyers';
 import MyOrders from '../../Shared/DashBoard/MyOrders/MyOrders';
 import MyProducts from '../../Shared/DashBoard/MyProducts/MyProducts';
 import MyWishList from '../../Shared/DashBoard/MyWishList/MyWishList';
@@ -92,20 +94,32 @@ const Route = () => {
 						element: <MyProducts></MyProducts>,
 					},
 					{
+						path: '/dashboard/mybuyers',
+						element: <MyBuyers></MyBuyers>,
+					},
+					{
 						path: '/dashboard/myOrders',
 						element: <MyOrders></MyOrders>,
 					},
 					{
 						path: '/dashboard/myWishList',
-						element: <MyWishList></MyWishList>
+						element: <MyWishList></MyWishList>,
 					},
 					{
 						path: '/dashboard/allSeller',
-						element: <AllSeller></AllSeller>,
+						element: (
+							<AdminRoutes>
+								<AllSeller></AllSeller>
+							</AdminRoutes>
+						),
 					},
 					{
 						path: '/dashboard/allBuyers',
-						element: <AllBuyers></AllBuyers>,
+						element: (
+							<AdminRoutes>
+								<AllBuyers></AllBuyers>
+							</AdminRoutes>
+						),
 					},
 				],
 			},

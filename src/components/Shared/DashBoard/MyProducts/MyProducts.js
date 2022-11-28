@@ -7,27 +7,26 @@ const MyProducts = () => {
 	const { user, loading } = useContext(AuthContext);
 	//! fetch for getting products data from mongodb.....
 
-	const url = `http://localhost:5000/products?email=${user?.email}`;
+	const url = `https://assignment-twelve-server.vercel.app/products?email=${user?.email}`;
 
 	const { data: products } = useQuery({
 		queryKey: ['products', user?.email],
 		queryFn: async () => {
 			const res = await fetch(url);
 			const data = await res.json();
-			return data
-		}
+			return data;
+		},
 	});
 
 	console.log(products);
 
-
 	const handleAdvertise = (id) => {
-		fetch(`http://localhost:5000/productById/${id}`)
+		fetch(`https://assignment-twelve-server.vercel.app/productById/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
 				if (data) {
-					fetch('http://localhost:5000/advertisement', {
+					fetch('https://assignment-twelve-server.vercel.app/advertisement', {
 						method: 'POST',
 						headers: {
 							'content-type': 'application/json',
@@ -45,7 +44,7 @@ const MyProducts = () => {
 	if (loading) {
 		return <Loader></Loader>;
 	}
-	
+
 	return (
 		<div className='mx-12'>
 			<h1>My Products{products?.length}</h1>
@@ -124,7 +123,10 @@ const MyProducts = () => {
 								>
 									Advertise Now
 								</button>
-								<button className='btn btn-sm mx-2 text-white'>Unsold</button>
+								<button className='btn btn-sm mx-2 bg-amber-500 hover:bg-amber-600 border-0 text-gray-600 hover:text-white'>
+									Available
+								</button>
+								{/*<button className='btn btn-sm mx-2 text-white'>Sold</button>*/}
 							</div>
 						</div>
 					</div>

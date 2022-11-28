@@ -27,6 +27,7 @@ const TeslaGroup = () => {
 	if (loading) {
 		return <Loader></Loader>;
 	}
+	console.log(logUser);
 	return (
 		<div>
 			<img
@@ -47,7 +48,10 @@ const TeslaGroup = () => {
 						</figure>
 						<div className='card-body'>
 							<h2 className='card-title'>Brand Name: {teslaData?.title}</h2>
-							<p className='text-start'>Exposure time : {teslaData?.time}</p>
+							<p className='text-start'>
+								Exposure time :{' '}
+								<span className='text-blue-600'>{teslaData?.time}</span>
+							</p>
 
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>

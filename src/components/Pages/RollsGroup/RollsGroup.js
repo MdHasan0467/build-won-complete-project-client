@@ -29,6 +29,7 @@ const RollsGroup = () => {
 	if (loading) {
 		return <Loader></Loader>;
 	}
+	console.log(logUser)
 	return (
 		<div>
 			<img
@@ -49,7 +50,10 @@ const RollsGroup = () => {
 						</figure>
 						<div className='card-body'>
 							<h2 className='card-title'>Brand Name: {rollsData?.title}</h2>
-							<p className='text-start'>Exposure time : {rollsData?.time}</p>
+							<p className='text-start'>
+								Exposure time :{' '}
+								<span className='text-blue-600'>{rollsData?.time}</span>
+							</p>
 
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>

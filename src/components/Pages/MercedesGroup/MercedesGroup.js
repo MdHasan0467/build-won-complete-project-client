@@ -27,6 +27,7 @@ const MercedesGroup = () => {
 	if (loading) {
 		return <Loader></Loader>;
 	}
+	console.log(logUser)
 	return (
 		<div>
 			<img
@@ -47,7 +48,9 @@ const MercedesGroup = () => {
 						</figure>
 						<div className='card-body'>
 							<h2 className='card-title'>Brand Name: {mercedesData?.title}</h2>
-							<p className='text-start'>Exposure time : {mercedesData?.time}</p>
+							<p className='text-start'>
+								Exposure time : <span className='text-blue-600'>{mercedesData?.time}</span>{' '}
+							</p>
 
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
@@ -122,7 +125,7 @@ const MercedesGroup = () => {
 									Only buyer can book this product
 								</p>
 							)}
-							
+
 							{logUser?.role === 'admin' && (
 								<p className='text-emerald-600 font-serif font-bold my-2'>
 									Only buyer can book this product

@@ -46,6 +46,7 @@ const Login = () => {
 				// }).catch(err => console.log(err))
 
 				navigate(from, { replace: true });
+				console.log('success login');
 				toast.success('Successfully Login.');
 				setLoginUserEmail(data.email);
 			})
@@ -61,7 +62,7 @@ const Login = () => {
 				const user = result.user;
 				console.log(user);
 
-				fetch('http://localhost:5000/googlebuyer', {
+				fetch('https://assignment-twelve-server.vercel.app/googlebuyer', {
 					method: 'POST',
 					headers: {
 						'content-type': 'application/json',
@@ -80,9 +81,6 @@ const Login = () => {
 			.catch((error) => console.error(error));
 	};
 	//!......................................
-
-
-		
 
 	return (
 		<div className='h-[800px] flex justify-center items-center'>
