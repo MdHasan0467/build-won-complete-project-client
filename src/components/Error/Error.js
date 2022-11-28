@@ -13,8 +13,16 @@ const Error = () => {
 					/>
 					<div className='container flex flex-col items-center justify-center px-5 mx-auto my-8'>
 						<div className='max-w-md text-center'>
-							<h2 className='mb-8 font-extrabold text-9xl text-slate-200'>
-								<span className='sr-only'>Error</span>404
+							<h2 className='mb-8 ml-16 font-extrabold text-9xl flex text-slate-200'>
+								<div>
+									<span className='sr-only'>Error</span>4
+								</div>
+								<img
+									className=' w-[150px] animate-bounce'
+									src='car-wheel.png'
+									alt=''
+								/>
+								<span className='sr-only'>Error</span>4
 							</h2>
 							<p className='text-2xl font-semibold md:text-3xl'>
 								Sorry, we couldn't find this page.
