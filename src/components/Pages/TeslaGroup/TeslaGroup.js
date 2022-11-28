@@ -160,11 +160,11 @@ const TeslaGroup = () => {
 											Book Now
 										</label>
 									</button>
-									
+
 									<button>
 										<label
 											onClick={() => handleWishList(teslaData?._id)}
-											className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
+											className='btn bg-lime-500 hover:bg-lime-600 border-0 text-white'
 										>
 											Add To Wish List
 										</label>
