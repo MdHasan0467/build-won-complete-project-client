@@ -26,12 +26,12 @@ const CustomNav = () => {
 			<div className='flex-1'>
 				<Link to='/home' className='flex hidden lg:block'>
 					<img
-						src='PremiCar.png'
+						src='CH_logo.png'
 						className='mr-3 h-6 sm:h-9 rounded-lg '
-						alt='PremiCar Logo'
+						alt='CH Logo'
 					/>
 					<span className='self-center whitespace-nowrap hidden lg:block text-xl font-semibold dark:text-white'>
-						PremiCar
+						Car House
 					</span>
 				</Link>
 				<div className='drowar'>

@@ -26,13 +26,13 @@ const MyWishList = () => {
 	return (
 		<div className='mx-12'>
 			<h1>My Wish Item {products?.length}</h1>
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
 				{products?.map((product) => (
 					<div key={product._id} className='card  bg-base-100 shadow-xl'>
 						<figure>
 							<img
 								src={product.productImage}
-								className='w-full h-[250px]'
+								className='w-full h-[250px] lg:[300px]'
 								alt='Shoes'
 							/>
 						</figure>
