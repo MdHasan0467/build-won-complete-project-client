@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
@@ -7,7 +7,8 @@ import { AuthContext } from '../../../Context/AuthProvider';
 import Loader from '../../../Loader/Loader';
 
 const AddProduct = () => {
-	const { user, loading } = useContext(AuthContext);
+	const { user, loading, logUser } = useContext(AuthContext);
+	console.log(logUser[0].permission);
 	const {
 		register,
 		handleSubmit,
@@ -38,6 +39,8 @@ const AddProduct = () => {
 					// console.log(imgData.data.url)
 
 					const addedProduct = {
+						verification: logUser[0].permission,
+						role: logUser[0].role,
 						author: user.displayName,
 						email: user.email,
 						title: data.title,
@@ -103,7 +106,12 @@ const AddProduct = () => {
 									)}
 								</div>
 								<div className='form-control  w-full max-w-xs'>
-									{user?.displayName}
+									<p className='text-semibold font-serif text-blue-600'>
+										Name : {user?.displayName}
+									</p>
+									<p className='text-semibold font-serif text-blue-600'>
+										{user?.email}
+									</p>
 								</div>
 							</div>
 							<div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
@@ -132,9 +140,18 @@ const AddProduct = () => {
 										})}
 										className='select input-bordered w-full max-w-xs'
 									>
+										<option>Ferrari</option>
+										<option>Audi</option>
+										<option>BMW</option>
+										<option>Lamborghini</option>
 										<option>Tesla</option>
 										<option>Mercedes_Benz</option>
 										<option>Rolls_Royce</option>
+										<option disabled>**** (comming soon)</option>
+										<option disabled>**** (comming soon)</option>
+										<option disabled>**** (comming soon)</option>
+										<option disabled>**** (comming soon)</option>
+										<option disabled>**** (comming soon)</option>
 									</select>
 									{errors.category && (
 										<p className='text-red-500'>{errors.category.message}</p>

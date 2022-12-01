@@ -47,28 +47,31 @@ const DashBoard = () => {
 						Open drawer
 					</label>
 				</div>
-				<div className='drawer-side'>
+				<div className='drawer-side border'>
 					<label htmlFor='my-drawer-2' className='drawer-overlay'></label>
 					<ul className='menu p-4 w-80 bg-base-100 text-base-content'>
+						<Link to='/home' className='flex lg:hidden mb-10'>
+							<img
+								src='PremiCar.png'
+								className='mr-3 h-6 sm:h-9 rounded-lg'
+								alt='PremiCar Logo'
+							/>
+							<span className='self-center text-xl font-semibold  '>
+								PremiCar
+							</span>
+						</Link>
+						<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-green-600  border-gray-300 border-l-green-600'>
+							<Link to='/dashboard/myprofile'>My Profile</Link>
+						</li>
 						{logUser?.role === 'Seller' && (
 							<>
-								<Link to='/home' className='flex lg:hidden'>
-									<img
-										src='PremiCar.png'
-										className='mr-3 h-6 sm:h-9 rounded-lg'
-										alt='PremiCar Logo'
-									/>
-									<span className='self-center whitespace-nowrap hidden lg:block text-xl font-semibold dark:text-white'>
-										PremiCar
-									</span>
-								</Link>
-								<li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-blue-600  border-gray-300 border-l-blue-600'>
 									<Link to='/dashboard/addProduct'>Add Product</Link>
 								</li>
-								<li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-orange-600 border-gray-300 border-l-orange-600'>
 									<Link to='/dashboard/myProduct'>My Products</Link>
 								</li>
-								<li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-purple-600 border-gray-300 border-l-purple-600'>
 									<Link to='/dashboard/mybuyers'>My Buyers</Link>
 								</li>
 							</>
@@ -76,20 +79,10 @@ const DashBoard = () => {
 
 						{logUser?.role === 'Buyer' && (
 							<>
-								<Link to='/home' className='flex lg:hidden'>
-									<img
-										src='PremiCar.png'
-										className='mr-3 h-6 sm:h-9 rounded-lg'
-										alt='PremiCar Logo'
-									/>
-									<span className='self-center whitespace-nowrap hidden lg:block text-xl font-semibold dark:text-white'>
-										PremiCar
-									</span>
-								</Link>
-								<li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-blue-600 border-gray-300 border-l-blue-600 '>
 									<Link to='/dashboard/myOrders'>My Orders</Link>
 								</li>
-								<li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-orange-600 border-gray-300 border-l-orange-600'>
 									<Link to='/dashboard/myWishList'>My WhishList</Link>
 								</li>
 							</>
@@ -97,21 +90,14 @@ const DashBoard = () => {
 
 						{logUser?.role === 'admin' && (
 							<>
-								<Link to='/home' className='flex lg:hidden'>
-									<img
-										src='PremiCar.png'
-										className='mr-3 h-6 sm:h-9 rounded-lg'
-										alt='PremiCar Logo'
-									/>
-									<span className='self-center whitespace-nowrap hidden lg:block text-xl font-semibold dark:text-white'>
-										PremiCar
-									</span>
-								</Link>
-								<li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-blue-600 border-gray-300 border-l-blue-600'>
 									<Link to='/dashboard/allBuyers'>All Buyers</Link>
 								</li>
-								<li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-purple-600 border-gray-300 border-l-purple-600'>
 									<Link to='/dashboard/allSeller'>All Sellers</Link>
+								</li>
+								<li className=' hover:text-white  my-2 border-l-4 hover:border-l-8 border hover:animate-pulse hover:bg-pink-600 border-gray-300 border-l-pink-600'>
+									<Link to='/dashboard/createUser'>Create an User</Link>
 								</li>
 							</>
 						)}

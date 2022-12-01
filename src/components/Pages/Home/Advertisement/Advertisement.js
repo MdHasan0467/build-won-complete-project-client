@@ -3,6 +3,23 @@ import React from 'react';
 
 const Advertisement = () => {
 	// //! fetch for getting products data from mongodb.....
+	const { data: animation } = useQuery({
+		queryKey: ['animation'],
+		queryFn: async () => {
+			try {
+				const res = await fetch(
+					'https://assignment-twelve-server.vercel.app/advertisement/categories/animation'
+				);
+				const data = await res.json();
+				return data;
+			} catch (err) {
+				console.error(err);
+			}
+		},
+	});
+	// console.log(animation);
+
+	// //! fetch for getting products data from mongodb.....
 	const { data: categories } = useQuery({
 		queryKey: ['categories'],
 		queryFn: async () => {
@@ -17,9 +34,31 @@ const Advertisement = () => {
 			}
 		},
 	});
-	console.log(categories);
+	// console.log(categories);
 	return (
-		<div className='mt-10'>
+		<div className='my-2'>
+			<marquee>
+				<div className='flex '>
+					{animation?.map((product) => (
+						<div className='card w-80 h-52 bg-base-100 shadow-xl image-full mx-7'>
+							<figure>
+								<img className='w-[100%]' src={product?.image} alt='Shoes' />
+							</figure>
+							<div className='card-body'>
+								<h2 className='card-title text-slate-200 font-serif'>
+									{product?.category}
+								</h2>
+								<p className='text-slate-200 font-serif'>{product?.title}</p>
+								<div className='card-actions justify-end'>
+									<h1 className='text-2xl text-slate-200 font-serif font-semibold'>
+										Buy Now ! Win Now !!
+									</h1>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</marquee>
 			{categories?.length > 0 && (
 				<>
 					<h1 className='flex justify-start text-2xl text-gray-900 font-bold font-serif my-2 ml-5 underline'>

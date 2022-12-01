@@ -27,8 +27,8 @@ const AuthProvider = ({ children }) => {
 		fetch(`https://assignment-twelve-server.vercel.app/users/${user?.email}`)
 			.then((res) => res.json())
 			.then((result) => {
-				// console.log(result[0]);
-				setLogUser(result[0]);
+				console.log(result);
+				setLogUser(result);
 			});
 	}, [user?.email]);
 

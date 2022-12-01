@@ -16,11 +16,10 @@ const Home = () => {
 	// //! fetch for getting users data from mongodb.....
 
 	useEffect(() => {
-		console.log(user?.email);
+		// console.log(user?.email);
 		fetch(`https://assignment-twelve-server.vercel.app/users/${user?.email}`)
 			.then((res) => res.json())
 			.then((result) => {
-				// console.log(result[0]);
 				setLogUser(result[0]);
 			});
 	}, [user?.email]);
@@ -30,12 +29,25 @@ const Home = () => {
 	if (loading) {
 		return <Loader></Loader>;
 	}
-	console.log(user?.email);
+	// console.log(user?.email);
 	return (
 		<div className='m-2'>
 			<CustomCarousel></CustomCarousel>
 			<Advertisement setProduct={setProduct}></Advertisement>
 			<ProductCategory setProduct={setProduct}></ProductCategory>
+			<form className='flex justify-center'>
+				<input
+					type='text'
+					placeholder='Search here'
+					className='input input-bordered rounded-0 input-success w-full max-w-xs'
+				/>
+				<button
+					type='submit'
+					className='border px-3 border-success hover:bg-success hover:text-white'
+				>
+					Search
+				</button>
+			</form>
 			<Feedback></Feedback>
 			<CustomModal product={product}></CustomModal>
 		</div>

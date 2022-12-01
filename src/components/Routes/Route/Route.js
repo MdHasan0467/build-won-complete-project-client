@@ -3,21 +3,23 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import DeshboardDesign from '../../DeshboardDesign/DeshboardDesign';
 import Error from '../../Error/Error';
 import FAQ from '../../Pages/FAQ/FAQ';
+import FerrariGroup from '../../Pages/Home/FerrariGroup/FerrariGroup';
 import Home from '../../Pages/Home/Home';
 import Login from '../../Pages/Login/Login';
 import MercedesGroup from '../../Pages/MercedesGroup/MercedesGroup';
 import RollsGroup from '../../Pages/RollsGroup/RollsGroup';
 import Signup from '../../Pages/Signup/Signup';
 import TeslaGroup from '../../Pages/TeslaGroup/TeslaGroup';
-import AdminRoutes from '../../PrivateRoute/AdminRoutes/AdminRoutes';
 import PrivateRoute from '../../PrivateRoute/PrivateRoute';
 import AddProduct from '../../Shared/DashBoard/AddProduct/AddProduct';
 import AllBuyers from '../../Shared/DashBoard/AllBuyers/AllBuyers';
 import AllSeller from '../../Shared/DashBoard/AllSeller/AllSeller';
+import CreateUserByAdmin from '../../Shared/DashBoard/CreateUserByAdmin/CreateUserByAdmin';
 import DashBoard from '../../Shared/DashBoard/DashBoard';
 import MyBuyers from '../../Shared/DashBoard/MyBuyers/MyBuyers';
 import MyOrders from '../../Shared/DashBoard/MyOrders/MyOrders';
 import MyProducts from '../../Shared/DashBoard/MyProducts/MyProducts';
+import MyProfile from '../../Shared/DashBoard/MyProfile/MyProfile';
 import MyWishList from '../../Shared/DashBoard/MyWishList/MyWishList';
 import Main from '../Main/Main';
 
@@ -60,6 +62,14 @@ const Route = () => {
 						),
 					},
 					{
+						path: '/ferrari',
+						element: (
+							<PrivateRoute>
+								<FerrariGroup></FerrariGroup>
+							</PrivateRoute>
+						),
+					},
+					{
 						path: '/faq',
 						element: <FAQ></FAQ>,
 					},
@@ -90,6 +100,10 @@ const Route = () => {
 						element: <DeshboardDesign></DeshboardDesign>,
 					},
 					{
+						path: '/dashboard/myprofile',
+						element: <MyProfile></MyProfile>,
+					},
+					{
 						path: '/dashboard/myProduct',
 						element: <MyProducts></MyProducts>,
 					},
@@ -112,6 +126,10 @@ const Route = () => {
 					{
 						path: '/dashboard/allBuyers',
 						element: <AllBuyers></AllBuyers>,
+					},
+					{
+						path: '/dashboard/createUser',
+						element: <CreateUserByAdmin></CreateUserByAdmin>,
 					},
 				],
 			},

@@ -1,22 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../Context/AuthProvider';
-import Loader from '../../Loader/Loader';
-import { Checkmark } from 'react-checkmark';
-import BookModal from '../../Shared/BookModal/BookModal';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Context/AuthProvider';
+import Loader from '../../../Loader/Loader';
+import { Checkmark } from 'react-checkmark';
+import BookModal from '../../../Shared/BookModal/BookModal';
 
-const TeslaGroup = () => {
+const FerrariGroup = () => {
 	const { logUser, loading, user } = useContext(AuthContext);
 	const [selected, setSelected] = useState(null);
+	const [author, setAuthor] = useState(null);
 	const time = String(new Date()).slice(8, 21);
-	//! fetch for getting teslaDatas data from mongodb.....
-	const { data: teslaDatas } = useQuery({
-		queryKey: ['teslaDatas'],
+	//! fetch for getting ferrariDatas data from mongodb.....
+	const { data: ferrariDatas = [] } = useQuery({
+		queryKey: ['ferrariDatas'],
 		queryFn: async () => {
 			try {
 				const res = await fetch(
-					'https://assignment-twelve-server.vercel.app/teslaDatas'
+					'https://assignment-twelve-server.vercel.app/ferrariDatas'
 				);
 				const data = await res.json();
 				return data;
@@ -25,6 +26,7 @@ const TeslaGroup = () => {
 			}
 		},
 	});
+	console.log('author', author);
 
 	const handleWishList = (id) => {
 		// alert(id)
@@ -32,6 +34,7 @@ const TeslaGroup = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
+				setAuthor(data);
 
 				const wishData = {
 					author: data.author,
@@ -77,77 +80,78 @@ const TeslaGroup = () => {
 	return (
 		<div>
 			<img
-				src='TESLA-BANNER.png'
-				alt='tesla banner'
-				className='w-[500px] hidden my-3 ml-[30%] lg:block h-[170px]'
+				src='ferrari-logo.png'
+				alt='ferrari-logo'
+				className='w-[500px] hidden my-3 ml-[30%] lg:block h-[200px]'
 			/>
 
 			<div className='grid grid-cols-1 my-5 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-				{teslaDatas?.map((teslaData) => (
+				{ferrariDatas?.map((ferrariData) => (
 					<div className='card w-96 bg-base-100 shadow-xl'>
 						<figure>
 							<img
 								className='w-full h-[200px]'
-								src={teslaData?.image}
+								src={ferrariData?.image}
 								alt='Shoes'
 							/>
 						</figure>
 						<div className='card-body'>
-							<h2 className='card-title'>Brand Name: {teslaData?.title}</h2>
+							<h2 className='card-title'>Brand Name: {ferrariData?.title}</h2>
 							<p className='text-start'>
 								Exposure time :{' '}
-								<span className='text-blue-600'>{teslaData?.time}</span>
+								<span className='text-blue-600'>{ferrariData?.time}</span>{' '}
 							</p>
 
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Category :
 								</span>
-								{teslaData.category}
+								{ferrariData.category}
 							</p>
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Location :
 								</span>
-								{teslaData.location}
+								{ferrariData.location}
 							</p>
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Original Price :
 								</span>
-								{teslaData.originalPrice}
+								{ferrariData.originalPrice}
 							</p>
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Resale Price :
 								</span>
-								{teslaData.resalePrice}
+								{ferrariData.resalePrice}
 							</p>
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Years of use :
 								</span>
-								{teslaData.yearsOfUse}
+								{ferrariData.yearsOfUse}
 							</p>
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Year of Purchase :
 								</span>
-								{teslaData.yearOfPurchase}
+								{ferrariData.yearOfPurchase}
 							</p>
 							<p className='text-start'>
 								<span className='text-bold text-gray-800 text-xl'>
 									Description :
 								</span>
-								{teslaData.description}
+								{ferrariData.description}
 							</p>
 
-							{teslaData.author && (
+							{ferrariData.author && (
 								<p className='text-start flex'>
 									<span className='text-bold text-gray-800 text-xl'>
 										Seller :
 									</span>
 									<span className='flex ml-2'>
+										<p>{ferrariData.author}</p>
 										<p>
 											<Checkmark size='small' color='blue' />
 										</p>
@@ -158,17 +162,16 @@ const TeslaGroup = () => {
 								<div className='card-actions justify-end'>
 									<button>
 										<label
-											onClick={() => setSelected(teslaData)}
+											onClick={() => setSelected(ferrariData)}
 											htmlFor='booking-modal'
 											className='btn bg-green-500 hover:bg-green-600 border-0 text-white'
 										>
 											Book Now
 										</label>
 									</button>
-
 									<button>
 										<label
-											onClick={() => handleWishList(teslaData?._id)}
+											onClick={() => handleWishList(ferrariData?._id)}
 											className='btn bg-lime-500 hover:bg-lime-600 border-0 text-white'
 										>
 											Add To Wish List
@@ -176,18 +179,24 @@ const TeslaGroup = () => {
 									</button>
 								</div>
 							)}
+
 							{logUser?.role === 'Seller' && (
 								<p className='text-emerald-600 font-serif font-bold my-2'>
 									Only buyer can book this product
 								</p>
 							)}
+
 							{logUser?.role === 'admin' && (
 								<p className='text-emerald-600 font-serif font-bold my-2'>
 									Only buyer can book this product
 								</p>
 							)}
 						</div>
-						<BookModal selected={selected}></BookModal>
+
+						<BookModal
+							selected={selected}
+							setSelected={setSelected}
+						></BookModal>
 					</div>
 				))}
 			</div>
@@ -195,4 +204,4 @@ const TeslaGroup = () => {
 	);
 };
 
-export default TeslaGroup;
+export default FerrariGroup;

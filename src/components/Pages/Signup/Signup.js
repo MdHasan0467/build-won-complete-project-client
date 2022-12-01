@@ -4,7 +4,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 import Loader from '../../Loader/Loader';
 
 const Signup = () => {
-	const { user,loading } = useContext(AuthContext);
+	const { user, loading } = useContext(AuthContext);
 	const [success, setSuccess] = useState(false);
 	const [passwordError, setPasswordError] = useState('');
 	// const [createdUserEmail, setCreatedUserEmail] = useState('');
@@ -22,8 +22,9 @@ const Signup = () => {
 		const name = form.name.value;
 		const email = form.email.value;
 		const password = form.password.value;
-		const photoURL = form.profile.value;
+		const photoURL = form.img.value;
 		const role = form.role.value;
+
 		// console.log(name, photoURL, email, password, role);
 
 		//! Regex for password validation...
@@ -79,7 +80,7 @@ const Signup = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				// console.log(data);
-				navigate('/login');
+				navigate('/');
 				// setCreatedUserEmail(email);
 			});
 	};
@@ -135,8 +136,8 @@ const Signup = () => {
 									<input
 										className='block   py-1 px-7 mb-2 rounded-md'
 										type='text'
-										name='profile'
-										placeholder='Profile URL '
+										name='img'
+										placeholder='Photo URL'
 										required
 									/>
 								</div>

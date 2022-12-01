@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 const MercedesGroup = () => {
 	const { logUser, loading, user } = useContext(AuthContext);
 	const [selected, setSelected] = useState(null);
+	const [author, setAuthor] = useState(null);
 	const time = String(new Date()).slice(8, 21);
 	//! fetch for getting mercedesDatas data from mongodb.....
 	const { data: mercedesDatas = [] } = useQuery({
@@ -25,6 +26,7 @@ const MercedesGroup = () => {
 			}
 		},
 	});
+	console.log('author', author);
 
 	const handleWishList = (id) => {
 		// alert(id)
@@ -32,6 +34,7 @@ const MercedesGroup = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
+				setAuthor(data);
 
 				const wishData = {
 					author: data.author,
@@ -77,7 +80,7 @@ const MercedesGroup = () => {
 	return (
 		<div>
 			<img
-				src='mercedes.banner.jpg'
+				src='mercedes.banner.png'
 				alt='tesla banner'
 				className='w-[500px] hidden my-3 ml-[30%] lg:block h-[200px]'
 			/>
@@ -148,8 +151,10 @@ const MercedesGroup = () => {
 										Seller :
 									</span>
 									<span className='flex ml-2'>
-										{mercedesData.author}
-										<Checkmark size='small' color='blue' />
+										<p>{mercedesData.author}</p>
+										<p>
+											<Checkmark size='small' color='blue' />
+										</p>
 									</span>
 								</p>
 							)}

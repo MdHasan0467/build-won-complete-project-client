@@ -48,6 +48,21 @@ const AllSeller = ({}) => {
 				refetch();
 			});
 	};
+
+	const handleMakeVerify = (id) => {
+		fetch(`https://assignment-twelve-server.vercel.app/users/verify/${id}`, {
+			method: 'PUT',
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data.modifiedCount > 0) {
+					refetch();
+					toast.success('successfully verified this seller! ');
+				}
+			});
+	};
+
 	if (loading) {
 		return <Loader></Loader>;
 	}
@@ -55,18 +70,19 @@ const AllSeller = ({}) => {
 		<div>
 			{!usersrole && <h1>No Seller logged</h1>}
 			<h1>All sellers here</h1>
-			{usersrole &&
-				usersrole?.map((seller) => (
-					<div className='lg:overflow-x-auto lg:w-full w-[100vw]'>
-						<table className='table w-full'>
-							<thead>
-								<tr>
-									<th>User</th>
-									<th>Role</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
+
+			<div className='lg:overflow-x-auto'>
+				<table className='table w-full'>
+					<thead>
+						<tr>
+							<th>User</th>
+							<th className='hidden lg:block'>Role</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{usersrole &&
+							usersrole?.map((seller) => (
 								<tr>
 									<td>
 										<div className='flex items-center space-x-3'>
@@ -85,14 +101,30 @@ const AllSeller = ({}) => {
 										</div>
 									</td>
 									<td>
-										{seller.role}
-										<br />
-										<span className='badge badge-ghost badge-sm'>
-											**********
-										</span>
+										<div className='hidden lg:block'>
+											{seller.role}
+											<br />
+											<span className='badge badge-ghost badge-sm'>
+												**********
+											</span>
+										</div>
 									</td>
 
-									<th>
+									{seller?.permission === 'Verified' ? (
+										<p>Verified</p>
+									) : (
+										<td>
+											<label
+												onClick={() => handleMakeVerify(seller?._id)}
+												htmlFor='confirmation-modal'
+												className='btn btn-sm text-white border-0 bg-blue-500 hover:bg-blue-700'
+											>
+												Verify
+											</label>
+										</td>
+									)}
+
+									<td>
 										<label
 											onClick={() => setDeletingUser(seller)}
 											htmlFor='confirmation-modal'
@@ -100,12 +132,13 @@ const AllSeller = ({}) => {
 										>
 											Delete
 										</label>
-									</th>
+									</td>
 								</tr>
-							</tbody>
-						</table>
-					</div>
-				))}
+							))}
+					</tbody>
+				</table>
+			</div>
+
 			{deletingUser && (
 				<DeleteModal
 					deletingUser={deletingUser}

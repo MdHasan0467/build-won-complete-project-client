@@ -55,18 +55,18 @@ const AllBuyers = () => {
 	return (
 		<div>
 			<h1>All Buyers here</h1>
-			{usersroleBuyers &&
-				usersroleBuyers?.map((buyer) => (
-					<div className='lg:overflow-x-auto lg:w-full w-[100vw]'>
-						<table className='table w-full'>
-							<thead>
-								<tr>
-									<th>User</th>
-									<th>Role</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
+			<div className='lg:overflow-x-auto lg:w-full w-[100vw]'>
+				<table className='table w-full'>
+					<thead>
+						<tr>
+							<th>User</th>
+							<th>Role</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{usersroleBuyers &&
+							usersroleBuyers?.map((buyer) => (
 								<tr>
 									<td>
 										<div className='flex items-center space-x-3'>
@@ -102,10 +102,10 @@ const AllBuyers = () => {
 										</label>
 									</th>
 								</tr>
-							</tbody>
-						</table>
-					</div>
-				))}
+							))}
+					</tbody>
+				</table>
+			</div>
 
 			{deletingUser && (
 				<DeleteModal
