@@ -2,7 +2,7 @@
 
 ### Live Link : https://assignment-twelve-b5667.web.app/
 
-### Client github : https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-MdHasan0467
+### Client github : <https://github.com/MdHasan0467/build-won-complete-project-client>
 ### Server github : <https://github.com/MdHasan0467/-build-won-complete-project-server>
 
 ### Admin : mdhasan@gmail.com 
